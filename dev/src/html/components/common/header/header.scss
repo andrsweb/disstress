@@ -1,0 +1,56 @@
+@use '../../../../scss/vars/vars' as v;
+@use '../../../../scss/mixins/typography/text' as t;
+@use '../../../../scss/mixins/typography/titles' as h;
+@use '../../../../scss/mixins/global' as g;
+@use '../../../../scss/utils/placeholders/buttons/button' as *;
+
+.header {
+	width: 100%;
+	padding: 10px 0;
+	background-color: v.$c-white;
+
+	&-wrapper {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 24px;
+
+		@media(min-width: v.$sm) {
+			gap: 32px;
+		}
+	}
+
+	&-logo {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		img {
+			width: auto;
+			height: 40px;
+
+			@media(min-width: v.$sm) {
+				height: 50px;
+			}
+		}
+	}
+
+	nav {
+		ul {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			gap: 24px;
+		}
+
+		li {
+			a {
+				color: v.$c-black;
+				text-transform: uppercase;
+
+				@include t.t-text(true);
+			}
+		}
+	}
+}

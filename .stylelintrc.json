@@ -1,0 +1,11 @@
+{
+  "extends": [
+    "stylelint-config-standard-scss"
+  ],
+  "rules": {
+    "no-empty-source": null,
+    "rule-empty-line-before": null,
+    "selector-class-pattern": null,
+    "scss/double-slash-comment-whitespace-inside": null
+  }
+}

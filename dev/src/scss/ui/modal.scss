@@ -1,0 +1,33 @@
+@use '../vars/vars' as v;
+@use '../mixins/global' as g;
+
+.modal-wrapper {
+	position: fixed;
+	inset: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100vw;
+	height: 100dvh;
+	padding: 32px;
+	background-color: rgb(17 17 17 / 60%);
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	transition: opacity v.$tr ease, visibility v.$tr ease;
+	overflow-y: auto;
+	z-index: 100;
+
+	.modal {
+		margin: auto 0;
+	}
+
+	&-active {
+		opacity: 1;
+		visibility: visible;
+		pointer-events: auto;
+	}
+}
+
+
+
