@@ -1,0 +1,68 @@
+@use '../../../../scss/vars/vars' as v;
+@use '../../../../scss/mixins/typography/titles' as t;
+
+.contact {
+	width: 100%;
+	padding: 32px 0;
+
+	@media(min-width: v.$lg) {
+		padding: 64px 0;
+	}
+
+	&-wrapper {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 16px;
+
+		@media(min-width: v.$md) {
+			gap: 32px;
+		}
+
+		h3 {
+			color: v.$c-black;
+			text-align: center;
+
+			@include t.t-header;
+		}
+	}
+
+	&-items {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 16px;
+
+		@media(min-width: v.$md) {
+			gap: 32px;
+		}
+	}
+
+	&-item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 8px;
+
+		h4 {
+			color: v.$c-black;
+			text-align: center;
+
+			@include t.t-title-bold;
+		}
+
+		p {
+			color: v.$c-black;
+			text-align: center;
+
+			@include t.t-title-reg;
+		}
+
+		img {
+			width: auto;
+			height: 63px;
+		}
+	}
+}
