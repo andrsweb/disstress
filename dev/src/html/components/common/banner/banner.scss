@@ -1,0 +1,48 @@
+@use '../../../../scss/vars/vars' as v;
+@use '../../../../scss/mixins/typography/text' as t;
+
+.banner {
+	width: 100%;
+	background-color: v.$c-grey;
+	padding: 10px;
+
+	&-items {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 13px;
+	}
+
+	&-item {
+		display: none;
+		color: v.$c-text-grey;
+		text-align: center;
+		text-decoration: line-through;
+
+		@include t.t-text;
+
+		@media(min-width: v.$md) {
+			display: block;
+		}
+
+		&.active {
+			display: block;
+			color: v.$c-white;
+			text-decoration: none;
+		}
+
+
+	}
+
+	&-dot {
+		display: none;
+		width: 4px;
+		height: 4px;
+		border-radius: 50%;
+		background-color: v.$c-text-grey;
+
+		@media(min-width: v.$md) {
+			display: block;
+		}
+	}
+}
