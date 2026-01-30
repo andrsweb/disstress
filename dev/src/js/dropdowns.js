@@ -1,4 +1,4 @@
-import {reCalculateDropdownHeight} from "./common/common.js";
+import { reCalculateDropdownHeight } from "./common/common.js";
 
 document.addEventListener('DOMContentLoaded', () => {
 	'use strict'
@@ -8,6 +8,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const toggleDropdown = () => {
 	const dropdownButtons = document.querySelectorAll('.dropdown-button')
+	const openedDropdowns = document.querySelectorAll('.dropdown.opened')
+
+	if (openedDropdowns.length) {
+		openedDropdowns.forEach(dropdown => reCalculateDropdownHeight(dropdown))
+	}
 
 	if (!dropdownButtons.length) return
 

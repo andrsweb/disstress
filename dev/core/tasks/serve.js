@@ -1,12 +1,12 @@
 import gulp from 'gulp';
-import {browserSync} from '../config/server.js';
-import {paths} from '../config/paths.js';
-import {html} from './html.js';
-import {styles} from './styles.js';
-import {scripts} from './scripts.js';
-import {staticAssets, images, fonts} from './assets.js';
+import { browserSync } from '../config/server.js';
+import { paths } from '../config/paths.js';
+import { html } from './html.js';
+import { styles } from './styles.js';
+import { scripts } from './scripts.js';
+import { staticAssets, images, fonts } from './assets.js';
 
-const {watch, series} = gulp;
+const { watch, series } = gulp;
 
 export function serve() {
 	browserSync.init({
@@ -18,10 +18,10 @@ export function serve() {
 		notify: true
 	});
 
-	watch(paths.html.watch, html);
+	watch(paths.html.watch, series(html, (done) => { browserSync.reload(); done(); }));
 	watch(paths.styles.watch, styles);
-	watch(paths.scripts.watch, scripts);
-	watch(paths.static.src, staticAssets);
-	watch(paths.images.src, images);
-	watch(paths.fonts.src, fonts);
+	watch(paths.scripts.watch, series(scripts, (done) => { browserSync.reload(); done(); }));
+	watch(paths.static.src, series(staticAssets, (done) => { browserSync.reload(); done(); }));
+	watch(paths.images.src, series(images, (done) => { browserSync.reload(); done(); }));
+	watch(paths.fonts.src, series(fonts, (done) => { browserSync.reload(); done(); }));
 }

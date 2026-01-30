@@ -123,6 +123,25 @@ address {
 	border: 0
 }
 
+.blocks {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	&.start {
+		justify-content: flex-start;
+	}
+
+	&.center {
+		justify-content: center;
+	}
+
+	&.end {
+		justify-content: flex-end;
+	}
+}
+
 .wrapper {
 	position: relative;
 	display: flex;
