@@ -1,12 +1,13 @@
 @use '../../../../scss/vars/vars' as v;
 @use '../../../../scss/mixins/typography/text' as t;
+@use '../../../../scss/mixins/typography/labels' as l;
 
 .contact-panel {
 	position: fixed;
 	left: 0;
 	bottom: 0;
 	width: 100%;
-	background-color: v.$c-grey-97;
+	background-color: v.$c-dark-grey;
 	box-shadow: v.$shadow-1;
 	padding: 16px;
 	opacity: 0;
@@ -27,16 +28,21 @@
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
-		justify-content: space-between;
+		justify-content: center;
 		gap: 16px;
 		margin: 0 auto;
 
 		@media(min-width: v.$md) {
 			gap: 32px;
+			justify-content: space-between;
 		}
 	}
 
 	&-left {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+
 		p {
 			color: v.$c-black;
 
@@ -44,20 +50,32 @@
 		}
 	}
 
-	&-right {
-		display: flex;
+	&-item {
+		display: none;
 		align-items: center;
-		gap: 10px;
+		gap: 6px;
+
+		@include l.t-label;
 
 		@media(min-width: v.$md) {
-			gap: 16px;
+			display: flex;
 		}
 
-		.button.sm {
-			img {
-				width: 24px;
-				height: 24px;
-			}
+		& {
+			color: v.$c-white;
+		}
+
+		&::after {
+			content: '';
+			display: block;
+			width: 4px;
+			height: 4px;
+			background-color: v.$c-white;
+			border-radius: 50%;
+		}
+
+		&:last-child::after {
+			display: none;
 		}
 	}
 }
