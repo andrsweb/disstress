@@ -89,13 +89,13 @@
 		}
 
 		p,
-		a {
+		.real-estate {
 			color: v.$c-black;
 
 			@include l.t-label;
 		}
 
-		a {
+		.real-estate {
 			text-decoration: underline;
 		}
 	}
