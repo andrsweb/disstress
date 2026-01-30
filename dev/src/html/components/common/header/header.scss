@@ -167,6 +167,7 @@
 				transform: translateX(0);
 				background-color: #F2F2F2;
 				transition: padding ease-in-out v.$tr, background-color ease-in-out v.$tr, transform ease-in-out v.$tr;
+				overflow-y: auto;
 			}
 		}
 	}
