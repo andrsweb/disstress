@@ -5,6 +5,8 @@
 @use '../../../../scss/mixins/global' as g;
 
 .property-card {
+	display: flex;
+	flex-direction: column-reverse;
 	width: 100%;
 	box-shadow: v.$shadow-1;
 	background-color: v.$c-white;
@@ -12,6 +14,10 @@
 
 	@media(min-width: v.$sm) {
 		width: calc(100% / 2 - 16px);
+	}
+
+	@media(min-width: v.$md) {
+		flex-direction: column;
 	}
 
 	@media(min-width: v.$xl) {
@@ -28,9 +34,12 @@
 		width: 100%;
 		position: relative;
 		height: 200px;
-		border-top-left-radius: v.$br8;
-		border-top-right-radius: v.$br8;
+		border-radius: 0 0 v.$br8 v.$br8;
 		overflow: hidden;
+
+		@media(min-width: v.$md) {
+			border-radius: v.$br8 v.$br8 0 0;
+		}
 
 		@media(min-width: v.$xl) {
 			height: 240px;
@@ -40,9 +49,12 @@
 			width: 100%;
 			height: 100%;
 			object-fit: cover;
-			border-top-left-radius: v.$br8;
-			border-top-right-radius: v.$br8;
+			border-radius: 0 0 v.$br8 v.$br8;
 			transition: transform ease-in-out v.$tr;
+
+			@media(min-width: v.$md) {
+				border-radius: v.$br8 v.$br8 0 0;
+			}
 		}
 
 		.label {
@@ -65,8 +77,7 @@
 		gap: 8px;
 		padding: 16px 20px;
 		background-color: v.$c-white;
-		border-bottom-left-radius: v.$br8;
-		border-bottom-right-radius: v.$br8;
+		border-radius: 0 0 v.$br8 v.$br8;
 
 		h3 {
 			color: v.$c-white;
@@ -77,7 +88,8 @@
 			@include h.t-title-bold;
 		}
 
-		p, a {
+		p,
+		a {
 			color: v.$c-black;
 
 			@include l.t-label;
