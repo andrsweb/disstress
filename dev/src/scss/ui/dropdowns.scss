@@ -43,16 +43,6 @@
 .dropdown {
 	width: 100%;
 
-	&.opened {
-		.dropdown-content {
-			margin-top: 10px;
-		}
-
-		.dropdown-arrow {
-			transform: rotate(180deg);
-		}
-	}
-
 	&-button {
 		@extend %button;
 
@@ -64,14 +54,6 @@
 		text-align: left;
 
 		@include t.t-title-bold;
-	}
-
-	&-content {
-		width: 100%;
-		max-width: 600px;
-		height: 0;
-		overflow: hidden;
-		transition: height ease-in-out v.$tr, margin-top ease-in-out v.$tr;
 	}
 
 	&-arrow {
@@ -90,9 +72,14 @@
 
 	&-content {
 		width: 100%;
+		max-width: 600px;
+		height: 0;
+		overflow: hidden;
+		transition: height ease-in-out v.$tr, margin-top ease-in-out v.$tr;
 		padding-left: 24px;
 
-		p, li {
+		p,
+		li {
 			color: v.$c-black;
 
 			@include p.t-text;
@@ -121,5 +108,15 @@
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
+	}
+
+	&.opened {
+		.dropdown-content {
+			margin-top: 10px;
+		}
+
+		.dropdown-arrow {
+			transform: rotate(180deg);
+		}
 	}
 }

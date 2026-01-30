@@ -82,11 +82,9 @@
 			z-index: 2;
 
 			h3 {
-				@include t.t-header;
+				color: v.$c-white;
 
-				& {
-					color: v.$c-white;
-				}
+				@include t.t-header;
 			}
 
 			p {

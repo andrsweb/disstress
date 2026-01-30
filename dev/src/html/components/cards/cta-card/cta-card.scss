@@ -14,7 +14,7 @@
 	border-radius: v.$br12;
 	outline: 1px solid v.$c-grey-95;
 
-	@media(min-width: 576px) {
+	@media(min-width: v.$xm) {
 		flex-direction: row;
 	}
 

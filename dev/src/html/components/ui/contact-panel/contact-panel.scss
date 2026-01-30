@@ -54,15 +54,12 @@
 		display: none;
 		align-items: center;
 		gap: 6px;
+		color: v.$c-white;
 
 		@include l.t-label;
 
 		@media(min-width: v.$md) {
 			display: flex;
-		}
-
-		& {
-			color: v.$c-white;
 		}
 
 		&::after {
