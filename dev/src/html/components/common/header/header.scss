@@ -25,6 +25,8 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		position: relative;
+		z-index: 100;
 
 		img {
 			width: auto;
@@ -33,26 +35,147 @@
 	}
 
 	nav {
-		display: none;
+		display: flex;
+		justify-content: flex-end;
+		position: fixed;
+		right: 0;
+		top: 0;
+		z-index: 99;
+		width: 100vw;
+		height: 100vh;
+		background-color: rgb(17 17 17 / 39%);
+		opacity: 0;
+		visibility: hidden;
 
-		@media(min-width: v.$md) {
-			display: block;
+		@media(min-width: v.$lg) {
+			position: static;
+			right: auto;
+			top: auto;
+			height: auto;
+			background-color: transparent;
+			padding: 0;
+			margin: 0;
+			opacity: 1;
+			visibility: visible;
+			display: inline-block;
+			width: auto;
 		}
 
 		ul {
+			width: 300px;
 			display: flex;
-			flex-direction: row;
-			align-items: center;
+			flex-direction: column;
+			align-items: flex-start;
 			gap: 24px;
+			padding: 100px 20px 40px 20px;
+			transform: translateX(100%);
+
+			@media(min-width: v.$lg) {
+				width: auto;
+				padding: 0;
+				transform: translateX(0);
+				flex-direction: row;
+				align-items: center;
+			}
 		}
 
 		li {
 			a {
 				color: v.$c-black;
 				text-transform: uppercase;
+				font-size: 20px;
+				font-weight: v.$fw-700;
 
-				@include t.t-text(true);
+				@media(min-width: v.$lg) {
+					@include t.t-text(true);
+				}
 			}
+
+			&.mobile {
+				@media(min-width: v.$lg) {
+					display: none;
+				}
+			}
+		}
+	}
+
+	.burger-button {
+		@extend %button;
+
+		width: 32px;
+		height: 32px;
+		position: relative;
+		z-index: 100;
+
+		span {
+			width: 100%;
+			height: 2px;
+			background-color: v.$c-black;
+			position: relative;
+			border-radius: v.$br8;
+			transition: transform ease-in-out v.$tr;
+
+			&::before,
+			&::after {
+				content: '';
+				position: absolute;
+				left: 0;
+				display: block;
+				background-color: v.$c-black;
+				width: 100%;
+				height: 2px;
+				border-radius: v.$br8;
+				transition: transform ease-in-out v.$tr, opacity ease-in-out v.$tr;
+			}
+
+			&::before {
+				top: -8px;
+			}
+
+			&::after {
+				bottom: -8px;
+			}
+		}
+
+		@media(min-width: v.$lg) {
+			display: none;
+		}
+	}
+
+	&.menu-opened {
+		.burger-button {
+			span {
+				transform: rotate(-45deg);
+
+				&::before {
+					top: 0;
+					transform: rotate(90deg);
+				}
+
+				&::after {
+					opacity: 0;
+				}
+			}
+		}
+
+		nav {
+			opacity: 1;
+			visibility: visible;
+			z-index: 100;
+
+			ul {
+				transform: translateX(0);
+				background-color: #F2F2F2;
+				transition: padding ease-in-out v.$tr, background-color ease-in-out v.$tr, transform ease-in-out v.$tr;
+			}
+		}
+	}
+
+	.desktop-link {
+		display: none;
+
+		@media(min-width: v.$lg) {
+			display: flex;
 		}
 	}
 }
