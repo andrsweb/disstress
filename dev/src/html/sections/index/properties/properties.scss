@@ -1,0 +1,99 @@
+@use '../../../../scss/vars/vars' as v;
+@use '../../../../scss/mixins/typography/titles' as t;
+@use '../../../../scss/mixins/global' as g;
+
+.properties {
+	width: 100%;
+	padding: 32px 0;
+	background-color: v.$c-grey-97;
+
+	@media(min-width: v.$lg) {
+		padding: 64px 0;
+	}
+
+	&-wrapper {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 53px;
+	}
+
+	&-items {
+		display: flex;
+		align-items: stretch;
+		flex-wrap: wrap;
+		gap: 32px;
+
+		@media(min-width: v.$xl) {
+			gap: 44px;
+		}
+	}
+
+	.banner-card {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		width: 100%;
+		box-shadow: v.$shadow-1;
+		background-color: v.$c-dark-grey;
+		border-radius: v.$br8;
+		padding: 20px;
+		position: relative;
+
+		@media(min-width: v.$sm) {
+			width: calc(100% / 2 - 16px);
+		}
+
+		@media(min-width: v.$xl) {
+			width: calc(100% / 3 - 30px);
+		}
+
+		@include g.hover {
+			.banner-card-img img {
+				transform: scale(1.05);
+			}
+		}
+
+		&-img {
+			position: absolute;
+			left: -8px;
+			top: -40px;
+			display: none;
+
+			@media(min-width: v.$xl) {
+				display: block;
+			}
+
+			img {
+				max-width: 207px;
+				transition: transform ease-in-out v.$tr;
+			}
+		}
+
+		&-desc {
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 16px;
+			margin-top: auto;
+			position: relative;
+			z-index: 2;
+
+			h3 {
+				@include t.t-header;
+
+				& {
+					color: v.$c-white;
+				}
+			}
+
+			p {
+				color: v.$c-white;
+
+				@include t.t-title-bold;
+			}
+		}
+	}
+}

@@ -1,6 +1,7 @@
 @use '../vars/vars' as v;
 @use '../utils/placeholders/titles/titles' as *;
 @use '../mixins/typography/text' as t;
+@use '../mixins/typography/titles' as h;
 @use '../mixins/global' as g;
 
 h1, .h1, h2, .h2, h3, .h3,
@@ -38,5 +39,28 @@ strong {
 		color: v.$c-black;
 
 		@include t.t-text;
+	}
+}
+
+.title-box {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 32px;
+
+	h3 {
+		color: v.$c-black;
+		text-transform: uppercase;
+
+
+		@include h.t-header;
+	}
+
+	a {
+		color: v.$c-black;
+
+		@include h.t-title-bold;
 	}
 }
