@@ -43,13 +43,24 @@
 		}
 
 		&.xl {
-			padding: 13px 24px;
+			padding: 13px;
+			border: none;
+			min-height: 40px;
 
 			@include l.t-label;
 
+			@media(min-width: v.$md) {
+				min-height: 50px;
+			}
+
 			img {
-				width: 24px;
-				height: 24px;
+				width: 16px;
+				height: 16px;
+
+				@media(min-width: v.$lg) {
+					height: 24px;
+					width: 24px;
+				}
 			}
 		}
 	}
@@ -82,8 +93,13 @@
 			}
 
 			img {
-				width: 24px;
-				height: 24px;
+				width: 16px;
+				height: 16px;
+
+				@media(min-width: v.$lg) {
+					height: 24px;
+					width: 24px;
+				}
 			}
 		}
 
