@@ -1,15 +1,20 @@
-@use '../../../../scss/vars/vars' as v;
-@use '../../../../scss/mixins/typography/titles' as t;
-@use '../../../../scss/mixins/typography/text' as p;
-@use '../../../../scss/utils/placeholders/buttons/button' as *;
+@use '../vars/vars' as v;
+@use '../mixins/typography/titles' as t;
+@use '../mixins/typography/text' as p;
+@use '../utils/placeholders/buttons/button' as *;
 
 .dropdowns {
 	width: 100%;
 	padding: 32px 0;
 	background-color: v.$c-grey-97;
+	margin-bottom: 10px;
 
 	@media(min-width: v.$lg) {
 		padding: 64px 0;
+	}
+
+	&.white {
+		background-color: v.$c-white;
 	}
 
 	&-wrapper {

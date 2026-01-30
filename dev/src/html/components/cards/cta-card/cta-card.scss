@@ -1,0 +1,54 @@
+@use '../../../../scss/vars/vars' as v;
+@use '../../../../scss/mixins/typography/text' as t;
+@use '../../../../scss/mixins/typography/labels' as l;
+@use '../../../../scss/mixins/global' as g;
+
+.cta-card {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: flex-start;
+	gap: 32px;
+	padding: 16px 20px;
+	border-radius: v.$br12;
+	outline: 1px solid v.$c-grey-95;
+
+	@media(min-width: 576px) {
+		flex-direction: row;
+	}
+
+	&-img {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		max-width: 231px;
+
+		img {
+			width: 100%;
+			height: auto;
+		}
+	}
+
+	&-info {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 16px;
+
+		h3 {
+			color: v.$c-black;
+		}
+
+		p, li {
+			color: v.$c-black;
+
+			@include l.t-label;
+		}
+
+		ul {
+			list-style: disc;
+			list-style-position: inside;
+		}
+	}
+}
