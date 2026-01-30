@@ -1,0 +1,81 @@
+<div class="results-filters-wrapper">
+    <div class="results-filters-items">
+        <button class="result-filter" type="button" data-filter="price">
+            <span class="result-filter-top">
+                <span class="result-title">
+                    Max Price
+                </span>
+            </span>
+            <span class="result-filter-bottom">
+                <span class="result-value">
+                    8,000,000
+                    <img src="/img/arrow-down.svg" width="16" height="16" alt="Dropdown arrow">
+                </span>
+            </span>
+            <span class="result-dropdown"></span>
+        </button>
+        <div class="result-filter-wrapper">
+            <button class="result-filter" type="button" data-filter="beds_baths">
+                <span class="result-filter-top">
+                    <span class="result-title">
+                        Beds and baths
+                    </span>
+                </span>
+                <span class="result-filter-bottom">
+                    <span class="result-value">
+                        <span data-result-beds-baths-text>Select</span>
+                        <img src="/img/arrow-down.svg" width="16" height="16" alt="Dropdown arrow">
+                    </span>
+                </span>
+            </button>
+            <div class="beds-baths-dropdown fixed" data-result-dropdown="beds_baths" hidden>
+                <div class="beds-baths-content">
+                    <div class="beds-baths-section">
+                        <span class="beds-baths-label">Beds</span>
+                        <div class="beds-baths-buttons">
+                            <button type="button" class="beds-baths-btn" data-beds="1">1</button>
+                            <button type="button" class="beds-baths-btn" data-beds="2">2</button>
+                            <button type="button" class="beds-baths-btn" data-beds="3">3</button>
+                            <button type="button" class="beds-baths-btn" data-beds="4">4</button>
+                            <button type="button" class="beds-baths-btn" data-beds="5+">5+</button>
+                        </div>
+                    </div>
+                    <div class="beds-baths-section">
+                        <span class="beds-baths-label">Baths</span>
+                        <div class="beds-baths-buttons">
+                            <button type="button" class="beds-baths-btn" data-baths="1">1</button>
+                            <button type="button" class="beds-baths-btn" data-baths="2">2</button>
+                            <button type="button" class="beds-baths-btn" data-baths="3">3</button>
+                            <button type="button" class="beds-baths-btn" data-baths="4">4</button>
+                            <button type="button" class="beds-baths-btn" data-baths="5+">5+</button>
+                        </div>
+                    </div>
+                    <div class="beds-baths-actions">
+                        <button class="button gray sm beds-baths-cancel" type="button">
+                            <span>Cancel</span>
+                        </button>
+                        <button class="button green sm beds-baths-apply" type="button">
+                            <span>Apply</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" name="beds" value="" data-result-beds-value>
+            <input type="hidden" name="baths" value="" data-result-baths-value>
+        </div>
+        <button class="result-filter" type="button" data-filter="property_type">
+            <span class="result-filter-top">
+                <span class="result-title">
+                    Property type
+                </span>
+            </span>
+            <span class="result-filter-bottom">
+                <span class="result-value">
+                    All
+                    <img src="/img/arrow-down.svg" width="16" height="16" alt="Dropdown arrow">
+                </span>
+            </span>
+            <span class="result-dropdown"></span>
+        </button>
+    </div>
+</div>

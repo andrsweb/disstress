@@ -1,0 +1,60 @@
+{
+	"filters": {
+		"available": {
+			"label": "Available",
+			"options": [
+				{"value": "anytime", "label": "Anytime"},
+				{"value": "2026", "label": "2026"},
+				{"value": "2027", "label": "2027"},
+				{"value": "2028", "label": "2028"},
+				{"value": "2029", "label": "2029"}
+			]
+		},
+		"price": {
+			"label": "Max price, AED",
+			"options": [
+				{"value": "any", "label": "Any"},
+				{"value": "6500000", "label": "6,500,000"},
+				{"value": "8000000", "label": "8,000,000"},
+				{"value": "9200000", "label": "9,200,000"},
+				{"value": "12000000", "label": "12,000,000"},
+				{"value": "18500000", "label": "18,500,000"}
+			]
+		},
+		"property_type": {
+			"label": "Property type",
+			"options": [
+				{"value": "all", "label": "All"},
+				{"value": "apartments", "label": "Apartments"},
+				{"value": "villas", "label": "Villas"},
+				{"value": "houses", "label": "Houses"},
+				{"value": "offices", "label": "Offices"}
+			]
+		},
+		"developer": {
+			"label": "Developer",
+			"options": [
+				{"value": "all", "label": "All"},
+				{"value": "modon properties", "label": "Modon Properties"},
+				{"value": "farm gardens", "label": "Farm Gardens"},
+				{"value": "sobha realty", "label": "Sobha Realty"}
+			]
+		},
+		"area": {
+			"label": "Area",
+			"options": [
+				{"value": "all", "label": "All"},
+				{"value": "dubai-marina", "label": "Dubai Marina"},
+				{"value": "downtown", "label": "Downtown Dubai"},
+				{"value": "jvc", "label": "JVC"}
+			]
+		}
+	},
+	"categories": [
+		{"slug": "all", "label": "All", "defaults": {"available": "2026", "price": "8000000"}},
+		{"slug": "apartments", "label": "Apartments", "defaults": {"available": "2026", "price": "6500000"}},
+		{"slug": "houses", "label": "Houses", "defaults": {"available": "2027", "price": "12000000"}},
+		{"slug": "villas", "label": "Villas", "defaults": {"available": "2028", "price": "18500000"}},
+		{"slug": "offices", "label": "Offices", "defaults": {"available": "2026", "price": "9200000"}}
+	]
+}

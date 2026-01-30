@@ -1,8 +1,10 @@
 @forward '../../html/components/cards/cta-card/cta-card';
 @forward '../../html/components/cards/property-card/property-card';
+@forward '../../html/components/cards/unit-card/unit-card';
 @forward '../../html/components/common/banner/banner';
 @forward '../../html/components/common/footer/footer';
 @forward '../../html/components/common/header/header';
+@forward '../../html/components/filters/result-filters/result-filters';
 @forward '../../html/components/modals/image-modal/image-modal';
 @forward '../../html/components/ui/button/button';
 @forward '../../html/components/ui/contact-panel/contact-panel';
@@ -11,3 +13,4 @@
 @forward '../../html/sections/index/ico-text/ico-text';
 @forward '../../html/sections/index/map/map';
 @forward '../../html/sections/index/properties/properties';
+@forward '../../html/sections/properties/items/items';

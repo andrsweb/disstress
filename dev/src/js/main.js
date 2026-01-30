@@ -1,7 +1,8 @@
 import './common/common';
 import './common/tabs';
 // Components && Sections js
-import './contact-panel.js';
+import './contact-panel';
 import '../html/sections/index/map/map';
-import './swiper.js';
-import './dropdowns.js';
+import './swiper';
+import './dropdowns';
+import './filters';
