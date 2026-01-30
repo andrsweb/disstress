@@ -41,3 +41,15 @@
 		line-height: 32px;
 	}
 }
+
+@mixin t-title-reg {
+	font-family: v.$ff-title;
+	font-weight: v.$fw-400;
+	font-size: 20px;
+	line-height: 28px;
+
+	@media(min-width: v.$md) {
+		font-size: 24px;
+		line-height: 32px;
+	}
+}
