@@ -105,6 +105,14 @@
 				@include h.t-title-bold;
 			}
 
+			.old-price {
+				text-decoration: line-through;
+			}
+
+			.sold {
+				color: v.$c-green;
+			}
+
 			.unit-card-desc {
 				color: v.$c-black;
 
