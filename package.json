@@ -7,6 +7,7 @@
   "scripts": {
     "start": "node dev/core/scripts/start.js",
     "start:nl": "node dev/core/scripts/start.js --no-lint",
+    "start_wp:nl": "node dev/core/scripts/start.js --no-lint --wp",
     "build": "gulp --gulpfile dev/core/gulpfile.js --cwd . build --prod",
     "build:nl": "gulp --gulpfile dev/core/gulpfile.js --cwd . build --prod --no-lint",
     "build_wp:nl": "gulp --gulpfile dev/core/gulpfile.js --cwd . build --no-lint --wp",
