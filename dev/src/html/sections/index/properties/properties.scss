@@ -24,6 +24,7 @@
 		align-items: stretch;
 		flex-wrap: wrap;
 		gap: 32px;
+		width: 100%;
 
 		@media(min-width: v.$xl) {
 			gap: 44px;

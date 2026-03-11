@@ -1,5 +1,3 @@
-import {loadSearchData} from './common/common.js'
-
 document.addEventListener('DOMContentLoaded', () => {
     'use strict'
     void initSearchResultsFilters()
@@ -251,6 +249,21 @@ const updatePropertiesList = () => {
         formData.append('baths', bathsValueInput.value);
     }
 
+    let currentUrl = new URL(window.location.href);
+    
+    formData.forEach((value, key) => {
+        if ('action' === key || '_ajax_nonce' === key) return;
+
+        if ('all' === value || 'undefined' === value || 0 === value.length) {
+            currentUrl.searchParams.delete(key);
+            return;
+        }
+
+        currentUrl.searchParams.set(key, value);
+    });
+
+    formData.append('current_href', currentUrl.href);
+
     fetch(ajax_object.ajax_url, {
         method: 'POST',
         body: formData,
@@ -264,6 +277,12 @@ const updatePropertiesList = () => {
                 resultsBlock.innerHTML = response.data.properties;
                 h2Block.innerHTML = response.data.properties_found;
             }
+            console.log(currentUrl.href);
+            history.pushState(
+                currentUrl.hash,
+                '',
+                currentUrl.href
+            );
             setTimeout(() => {
                 resultsBlock.classList.remove('preloader');
                 document.dispatchEvent(new Event('ajaxComplete'));
