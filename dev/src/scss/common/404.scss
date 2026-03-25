@@ -22,6 +22,11 @@
       flex-direction: column;
       align-items: center;
       gap: 20px;
+      position: absolute;
+      padding: 24px;
+      background: #ffffff50;
+      border-radius: 16px;
+      color: v.$c-dark-grey;
 
       h1 {
         font-size: 100px;
