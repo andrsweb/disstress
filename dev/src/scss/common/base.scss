@@ -57,17 +57,24 @@ form {
 		align-items: flex-start;
 		gap: 4px;
 
-		input {
+		input,
+		select,
+		textarea {
 			width: 100%;
 			height: 40px;
 			background-color: v.$c-grey-97;
 			border-color: transparent;
 			border-radius: v.$br12;
 			color: v.$c-black;
+			padding: 0 8px;
 
 			@media(min-width: v.$md) {
 				height: 50px;
 			}
+		}
+
+		textarea {
+			height: 200px;
 		}
 	}
 

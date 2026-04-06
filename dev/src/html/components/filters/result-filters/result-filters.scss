@@ -90,7 +90,6 @@
 
 	.result-dropdown {
 		width: 100%;
-		max-height: 300px;
 		position: absolute;
 		top: 100%;
 		left: 50%;
@@ -101,7 +100,7 @@
 		border-bottom-left-radius: v.$br8;
 		border-bottom-right-radius: v.$br8;
 		background-color: v.$c-grey-97;
-		overflow-x: hidden;
+		overflow: hidden;
 		box-shadow: 0 10px 30px rgba(0 0 0 / 8%);
 
 		&[hidden] {
