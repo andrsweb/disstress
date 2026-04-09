@@ -1,5 +1,3 @@
-import {loadSearchData} from './common/common.js'
-
 document.addEventListener('DOMContentLoaded', () => {
     'use strict'
     void initSearchResultsFilters()
@@ -205,6 +203,7 @@ const initSearchResultsFilters = async () => {
                 updateDisplay()
                 closeDropdown(bbSelector)
                 openButton = null
+                bbSelector.dispatchEvent(new Event('change', {bubbles: true}));
             }
         })
         updateDisplay()
@@ -233,7 +232,8 @@ const updatePropertiesList = () => {
         h2Block = document.querySelector('.title-top h2'),
         bedsValueInput = filterItem?.querySelector('input[name="beds"]'),
         bathsValueInput = filterItem?.querySelector('input[name="baths"]'),
-        action = filterItem?.querySelector('input[name="action"]');
+        action = filterItem?.querySelector('input[name="action"]'),
+        allInputs = filterItem?.querySelectorAll('input');
 
     resultsBlock.classList.add('preloader');
 
@@ -241,6 +241,12 @@ const updatePropertiesList = () => {
     formData.append('_ajax_nonce', ajax_object._ajax_nonce);
     filterButtons.forEach(button => {
         formData.append(button.dataset.filter, button.dataset.selectedValue);
+    });
+
+    allInputs.forEach(input => {
+        if (!formData.has(input.name)) {
+            formData.append(input.name, input.value.replace(/,/g, ''));
+        }
     });
 
     if (bedsValueInput) {
@@ -263,6 +269,7 @@ const updatePropertiesList = () => {
             if (response.success) {
                 resultsBlock.innerHTML = response.data.properties;
                 h2Block.innerHTML = response.data.properties_found;
+                updateUrl();
             }
             setTimeout(() => {
                 resultsBlock.classList.remove('preloader');
@@ -273,4 +280,13 @@ const updatePropertiesList = () => {
             console.log(error);
             resultsBlock.classList.remove('preloader');
         });
+}
+
+/**
+ * Remove from URl pagination like /page-2/ and add to URL all filter parameters as GET params
+ */
+const updateUrl = () => {
+    const currentHref = document.querySelector('input[name="current_href"]')?.value.replace(/\/page-\d+(?=\/|$)/g, '');
+    console.log(currentHref);
+    history.replaceState({}, '', currentHref);
 }
