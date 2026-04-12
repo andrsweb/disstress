@@ -1,0 +1,115 @@
+@use "../../../../scss/vars/vars" as v;
+
+.submit-unit {
+	width: 100%;
+	padding: 42px 0;
+
+	&-wrapper {
+
+	}
+
+	&-form {}
+
+	&-inner {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		gap: 50px;
+
+		@media(min-width: v.$lg) {
+			gap: 100px;
+		}
+	}
+
+	&-left, &-right {
+		width: 100%;
+
+		@media(min-width: v.$lg) {
+			width: 50%;
+		}
+	}
+
+	&-left {}
+
+	&-right {}
+
+	fieldset {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.inputs-box {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 4px;
+	}
+
+	.inputs-wrapper {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		gap: 16px;
+
+		img {
+			width: auto;
+			height: 43px;
+		}
+	}
+
+	.inputs-group {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		gap: 16px;
+
+		.input-group {
+			&:first-child {
+				width: 68%;
+			}
+
+			&:last-child {
+				width: 32%;
+			}
+		}
+	}
+
+	.input-group {
+		width: 100%;
+		display: flex;
+
+		textarea {
+			min-height: 129px;
+
+			@media(min-width: v.$lg) {
+				min-height: 169px;
+			}
+		}
+	}
+
+	.submit-buttons-wrapper {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 5px;
+	}
+
+	.submit-buttons {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		gap: 7px;
+	}
+
+	.submit-unit-bottom {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		gap: 16px;
+		justify-content: space-between;
+	}
+}
