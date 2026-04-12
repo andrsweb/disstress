@@ -1,5 +1,5 @@
 import Swiper from 'swiper';
-import {Navigation, Thumbs} from 'swiper/modules';
+import {Navigation, Thumbs, Pagination} from 'swiper/modules';
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	initSwiperThumbs();
 	initSingleSwiper();
+	initGallerySlider();
 });
 
 const initSwiperThumbs = () => {
@@ -58,5 +59,23 @@ const initSingleSwiper = () => {
 			nextEl: '.swiper-next',
 			prevEl: '.swiper-prev',
 		}
+	});
+};
+
+export const initGallerySlider = () => {
+	return new Swiper('.gallery-swiper', {
+		modules: [Navigation, Pagination],
+		slidesPerView: 1,
+		spaceBetween: 20,
+		observer: true,
+		observeParents: true,
+		navigation: {
+			nextEl: '.gallery-arrow-next',
+			prevEl: '.gallery-arrow-prev',
+		},
+		pagination: {
+			el: '.gallery-modal-counter',
+			type: 'fraction',
+		},
 	});
 };

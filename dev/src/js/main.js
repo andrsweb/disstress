@@ -4,6 +4,7 @@ import './common/tabs';
 import './contact-panel';
 import '../html/sections/unit/map/map';
 import './swiper';
+import './gallery';
 import './dropdowns';
 import './filters';
 import './header-menu';
