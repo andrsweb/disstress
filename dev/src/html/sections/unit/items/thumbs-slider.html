@@ -1,20 +1,55 @@
-<div class="swiper main-swiper">
-    <div class="swiper-wrapper">
-        <div class="swiper-slide"><img class="swiper-slide-img" src="/img/h1.jpg" alt="Image"></div>
-        <div class="swiper-slide"><img class="swiper-slide-img" src="/img/h2.jpg" alt="Image"></div>
-        <div class="swiper-slide"><img class="swiper-slide-img" src="/img/h3.jpg" alt="Image"></div>
-        <div class="swiper-slide"><img class="swiper-slide-img" src="/img/h4.jpg" alt="Image"></div>
-        <div class="swiper-slide"><img class="swiper-slide-img" src="/img/h5.jpg" alt="Image"></div>
+<div class="unit-gallery">
+    <div class="unit-gallery-desktop">
+        <div class="unit-gallery-main">
+            <div class="unit-gallery-item big" data-gallery-index="0" data-modal-open="gallery-modal">
+                <img src="/img/h1.jpg" alt="Gallery Image 1">
+            </div>
+        </div>
+        <div class="unit-gallery-side">
+            <div class="unit-gallery-item" data-gallery-index="1" data-modal-open="gallery-modal">
+                <img src="/img/h2.jpg" alt="Gallery Image 2">
+            </div>
+            <div class="unit-gallery-item" data-gallery-index="2" data-modal-open="gallery-modal">
+                <img src="/img/h3.jpg" alt="Gallery Image 3">
+            </div>
+            <div class="unit-gallery-item" data-gallery-index="3" data-modal-open="gallery-modal">
+                <img src="/img/h4.jpg" alt="Gallery Image 4">
+            </div>
+            <div class="unit-gallery-item last" data-gallery-index="4" data-modal-open="gallery-modal">
+                <img src="/img/h5.jpg" alt="Gallery Image 5">
+                <div class="unit-gallery-overlay">+3</div>
+            </div>
+        </div>
     </div>
-    <button class="swiper-prev"><img class="swiper-slide-img" src="/img/swiper-arr.svg" width="16" height="16" alt="Prev"></button>
-    <button class="swiper-next"><img class="swiper-slide-img" src="/img/swiper-arr.svg" width="16" height="16" alt="Next"></button>
-</div>
-<div class="swiper thumbs-swiper-container">
-    <div class="swiper-wrapper">
-        <div class="swiper-slide"><img class="swiper-slide-img" src="/img/h1.jpg" alt="Thumb"></div>
-        <div class="swiper-slide"><img class="swiper-slide-img" src="/img/h2.jpg" alt="Thumb"></div>
-        <div class="swiper-slide"><img class="swiper-slide-img" src="/img/h3.jpg" alt="Thumb"></div>
-        <div class="swiper-slide"><img class="swiper-slide-img" src="/img/h4.jpg" alt="Thumb"></div>
-        <div class="swiper-slide"><img class="swiper-slide-img" src="/img/h5.jpg" alt="Thumb"></div>
+
+    <div class="unit-gallery-mobile">
+        <div class="swiper main-swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" data-gallery-index="0" data-modal-open="gallery-modal"><img class="swiper-slide-img" src="/img/h1.jpg" alt="Image"></div>
+                <div class="swiper-slide" data-gallery-index="1" data-modal-open="gallery-modal"><img class="swiper-slide-img" src="/img/h2.jpg" alt="Image"></div>
+                <div class="swiper-slide" data-gallery-index="2" data-modal-open="gallery-modal"><img class="swiper-slide-img" src="/img/h3.jpg" alt="Image"></div>
+                <div class="swiper-slide" data-gallery-index="3" data-modal-open="gallery-modal"><img class="swiper-slide-img" src="/img/h4.jpg" alt="Image"></div>
+                <div class="swiper-slide" data-gallery-index="4" data-modal-open="gallery-modal"><img class="swiper-slide-img" src="/img/h5.jpg" alt="Image"></div>
+                <div class="swiper-slide" data-gallery-index="5" data-modal-open="gallery-modal"><img class="swiper-slide-img" src="/img/h1.jpg" alt="Image"></div>
+                <div class="swiper-slide" data-gallery-index="6" data-modal-open="gallery-modal"><img class="swiper-slide-img" src="/img/h2.jpg" alt="Image"></div>
+                <div class="swiper-slide" data-gallery-index="7" data-modal-open="gallery-modal"><img class="swiper-slide-img" src="/img/h3.jpg" alt="Image"></div>
+            </div>
+            <button class="swiper-prev"><img class="swiper-slide-img" src="/img/swiper-arr.svg" width="16" height="16" alt="Prev"></button>
+            <button class="swiper-next"><img class="swiper-slide-img" src="/img/swiper-arr.svg" width="16" height="16" alt="Next"></button>
+        </div>
+        <div class="swiper thumbs-swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img class="swiper-slide-img" src="/img/h1.jpg" alt="Thumb"></div>
+                <div class="swiper-slide"><img class="swiper-slide-img" src="/img/h2.jpg" alt="Thumb"></div>
+                <div class="swiper-slide"><img class="swiper-slide-img" src="/img/h3.jpg" alt="Thumb"></div>
+                <div class="swiper-slide"><img class="swiper-slide-img" src="/img/h4.jpg" alt="Thumb"></div>
+                <div class="swiper-slide"><img class="swiper-slide-img" src="/img/h5.jpg" alt="Thumb"></div>
+                <div class="swiper-slide"><img class="swiper-slide-img" src="/img/h1.jpg" alt="Thumb"></div>
+                <div class="swiper-slide"><img class="swiper-slide-img" src="/img/h2.jpg" alt="Thumb"></div>
+                <div class="swiper-slide"><img class="swiper-slide-img" src="/img/h3.jpg" alt="Thumb"></div>
+            </div>
+        </div>
     </div>
 </div>
+
+@@include('components/modals/gallery-modal/gallery-modal.html')
