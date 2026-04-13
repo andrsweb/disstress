@@ -8,3 +8,4 @@ import './gallery';
 import './dropdowns';
 import './filters';
 import './header-menu';
+import './submit-unit';

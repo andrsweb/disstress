@@ -9,9 +9,13 @@
                             <div class="input-group">
                                 <label for="s-text">
                                     Title
-                                    <input type="text" id="s-text" required>
+                                    <input type="text" id="s-text" name="title" required>
                                 </label>
                             </div>
+                            <label class="custom-checkbox">
+                                <input type="checkbox" name="is_new">
+                                <span>This is a new property</span>
+                            </label>
                             <div class="inputs-wrapper">
                                 <img src="/img/logo-sm.png" width="31" height="43" alt="">
                                 <div class="inputs-box">
@@ -19,52 +23,122 @@
                                         <div class="input-group">
                                             <label for="s-price">
                                                 Price, AED
-                                                <input type="number" id="s-price" required>
+                                                <input type="number" id="s-price" name="price" min="0" required>
                                             </label>
                                         </div>
                                         <div class="input-group half-width">
                                             <label for="s-sqrt">
                                                 Area, square feets
-                                                <input type="number" id="s-sqrt" required>
+                                                <input type="number" id="s-sqrt" name="area" min="0" required>
                                             </label>
                                         </div>
                                     </div>
-                                    <span class="sqrt-value">Price per square foot:</span>
+                                    <span class="sqrt-value" data-sqrt-value>Price per square foot: <span></span></span>
                                 </div>
                             </div>
-                            <div class="input-group">
+                            <div class="inputs-group">
+                                <div class="input-group">
+                                    <div class="input-wrapper">
+                                        <span class="label-text">Unit type</span>
+                                        <div class="dropdown">
+                                            <button class="dropdown-button" type="button">
+                                                <span class="dropdown-title">Select property type</span>
+                                                <span class="dropdown-arrow">
+                                                    <img src="/img/arrow-down.svg" width="16" height="16"
+                                                         alt="vector arrow">
+                                                </span>
+                                            </button>
+                                            <div class="dropdown-content">
+                                                <div class="dropdown-inner">
+                                                    <button type="button" class="dropdown-option"
+                                                            data-value="apartments">Apartments
+                                                    </button>
+                                                    <button type="button" class="dropdown-option" data-value="houses">
+                                                        Houses
+                                                    </button>
+                                                    <button type="button" class="dropdown-option"
+                                                            data-value="villas">Villas
+                                                    </button>
+                                                    <button type="button" class="dropdown-option"
+                                                            data-value="offices">Offices
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="unit_type" value="">
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-wrapper">
+                                        <span class="label-text">Property</span>
+                                        <div class="dropdown">
+                                            <button class="dropdown-button" type="button">
+                                                <span class="dropdown-title">Select</span>
+                                                <span class="dropdown-arrow">
+                                                    <img src="/img/arrow-down.svg" width="16" height="16"
+                                                         alt="vector arrow">
+                                                </span>
+                                            </button>
+                                            <div class="dropdown-content">
+                                                <div class="dropdown-inner">
+                                                    <button type="button" class="dropdown-option"
+                                                            data-value="burj-khalifa">
+                                                        Burj Khalifa
+                                                    </button>
+                                                    <button type="button" class="dropdown-option"
+                                                            data-value="princess-tower">Princess Tower
+                                                    </button>
+                                                    <button type="button" class="dropdown-option"
+                                                            data-value="address-downtown">Address Downtown
+                                                    </button>
+                                                    <button type="button" class="dropdown-option"
+                                                            data-value="damac-heights">DAMAC Heights
+                                                    </button>
+                                                    <button type="button" class="dropdown-option"
+                                                            data-value="marina-101">Marina 101
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="property" value="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="inputs-group">
                                 <div class="submit-buttons-wrapper">
-                                    <span>Bedrooms</span>
-                                    <div class="submit-buttons">
+                                    <span class="dropdown-label">Bedrooms</span>
+                                    <div class="submit-buttons" data-beds-group>
                                         <button type="button" class="beds-baths-btn" data-beds="1">1</button>
                                         <button type="button" class="beds-baths-btn" data-beds="2">2</button>
                                         <button type="button" class="beds-baths-btn" data-beds="3">3</button>
                                         <button type="button" class="beds-baths-btn" data-beds="4">4</button>
                                         <button type="button" class="beds-baths-btn" data-beds="5">5+</button>
                                     </div>
+                                    <input type="hidden" name="bedrooms" value="">
                                 </div>
                                 <div class="submit-buttons-wrapper">
-                                    <span>Bathrooms</span>
-                                    <div class="submit-buttons">
+                                    <span class="dropdown-label">Bathrooms</span>
+                                    <div class="submit-buttons" data-baths-group>
                                         <button type="button" class="beds-baths-btn" data-baths="1">1</button>
                                         <button type="button" class="beds-baths-btn" data-baths="2">2</button>
                                         <button type="button" class="beds-baths-btn" data-baths="3">3</button>
                                         <button type="button" class="beds-baths-btn" data-baths="4">4</button>
                                     </div>
+                                    <input type="hidden" name="bathrooms" value="">
                                 </div>
                             </div>
                             <div class="input-group">
                                 <label for="s-desc">
                                     Description
-                                    <textarea name="" id="s-desc" ></textarea>
+                                    <textarea name="description" id="s-desc" required></textarea>
                                 </label>
                             </div>
                         </fieldset>
                         <div class="submit-unit-bottom">
                             <span>New units are save as draft for moderation</span>
-                            <button class="button green xl" type="submit">
+                            <button class="button green xl" type="submit" disabled>
                                 <img src="/img/rect.svg" width="12" height="19" alt="">
-                                Submit property
+                                Submit Unit
                             </button>
                         </div>
                     </div>
