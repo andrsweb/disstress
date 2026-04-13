@@ -74,8 +74,9 @@
 		width: 100%;
 		max-width: 600px;
 		height: 0;
+		opacity: 0;
 		overflow: hidden;
-		transition: height ease-in-out v.$tr, margin-top ease-in-out v.$tr;
+		transition: height v.$tr ease, margin-top v.$tr ease, opacity v.$tr ease;
 		padding-left: 24px;
 
 		p,
@@ -113,6 +114,7 @@
 	&.opened {
 		.dropdown-content {
 			margin-top: 10px;
+			opacity: 1;
 		}
 
 		.dropdown-arrow {
