@@ -1,4 +1,6 @@
 //libs
+@forward '../../../node_modules/filepond/dist/filepond.min.css';
+@forward '../../../node_modules/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css';
 
 // Defaults styles.
 @forward 'common/fonts';
@@ -17,6 +19,7 @@
 @forward 'ui/dropdowns';
 @forward 'ui/beds-baths';
 @forward 'ui/checkbox';
+@forward 'ui/uploader';
 
 //generated
 @forward 'generated/html-modules';

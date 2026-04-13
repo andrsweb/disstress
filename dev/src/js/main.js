@@ -9,3 +9,4 @@ import './dropdowns';
 import './filters';
 import './header-menu';
 import './submit-unit';
+import './uploader';
