@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
-	'use strict'
-	
-	initSubmitUnit();
+	'use strict';
+
+	initFormInteractions();
 });
 
-const initSubmitUnit = () => {
+const initFormInteractions = () => {
 	const form = document.querySelector('.submit-unit-form');
 	if (!form) return;
 
@@ -15,47 +15,60 @@ const initSubmitUnit = () => {
 
 	if (!priceInp || !areaInp || !resultSpan || !submitBtn) return;
 
-	const fmt = (n) => new Intl.NumberFormat('en-US').format(Math.round(n));
-	const clean = (v) => v.replace(/\D/g, '').replace(/^0+/, '') || '';
+	const formatNumber = (num) => new Intl.NumberFormat('en-US').format(Math.round(num));
+	const cleanNumericValue = (val) => val.replace(/\D/g, '').replace(/^0+/, '');
 
-	const updateCalc = () => {
-		const p = parseInt(priceInp.value, 10), a = parseInt(areaInp.value, 10);
-		resultSpan.textContent = (p > 0 && a > 0) ? ` ~${fmt(p / a)} AED / sq ft` : '';
+	const updateCalculations = () => {
+		const price = parseInt(priceInp.value, 10);
+		const area = parseInt(areaInp.value, 10);
+		resultSpan.textContent = (price > 0 && area > 0) ? ` ~${formatNumber(price / area)} AED / sq ft` : '';
 	};
 
-	const validate = () => {
-		const els = form.querySelectorAll('[required]');
-		const ok = Array.from(els).every(el => el.type === 'checkbox' ? el.checked : el.value.trim() !== '');
-		submitBtn.disabled = !ok;
+	const checkValidity = () => {
+		const requiredElements = form.querySelectorAll('[required]');
+		const isFormValid = Array.from(requiredElements).every(el =>
+			el.type === 'checkbox' ? el.checked : el.value.trim() !== ''
+		);
+		submitBtn.disabled = !isFormValid;
 	};
 
-	const blockLetters = (e) => {
+	const handleNumericInput = (e) => {
 		if (e.key.length === 1 && !/[0-9]/.test(e.key) && !e.ctrlKey && !e.metaKey) {
 			e.preventDefault();
 		}
 	};
 
-	form.querySelectorAll('.submit-buttons-wrapper').forEach(grp => {
-		const btns = grp.querySelectorAll('.beds-baths-btn'), inp = grp.querySelector('input[type="hidden"]');
-		btns.forEach(btn => {
-			btn.addEventListener('click', () => {
-				btns.forEach(b => b.classList.remove('active'));
-				btn.classList.add('active');
-				inp.value = btn.dataset.beds || btn.dataset.baths;
-				inp.dispatchEvent(new Event('change', {bubbles: true}));
+	const initButtonGroupToggles = () => {
+		form.querySelectorAll('.submit-buttons-wrapper').forEach(wrapper => {
+			const buttons = wrapper.querySelectorAll('.beds-baths-btn');
+			const hiddenInput = wrapper.querySelector('input[type="hidden"]');
+
+			buttons.forEach(btn => {
+				btn.addEventListener('click', () => {
+					buttons.forEach(b => b.classList.remove('active'));
+					btn.classList.add('active');
+					hiddenInput.value = btn.dataset.beds || btn.dataset.baths;
+					hiddenInput.dispatchEvent(new Event('change', {bubbles: true}));
+				});
 			});
 		});
-	});
+	};
 
-	[priceInp, areaInp].forEach(inp => {
-		inp.addEventListener('keydown', blockLetters);
-		inp.addEventListener('input', () => {
-			inp.value = clean(inp.value);
-			updateCalc();
+	const initEvents = () => {
+		[priceInp, areaInp].forEach(inp => {
+			inp.addEventListener('keydown', handleNumericInput);
+			inp.addEventListener('input', () => {
+				inp.value = cleanNumericValue(inp.value);
+				updateCalculations();
+			});
 		});
-	});
 
-	form.addEventListener('input', validate);
-	form.addEventListener('change', validate);
-	validate();
+		form.addEventListener('input', checkValidity);
+		form.addEventListener('change', checkValidity);
+
+		initButtonGroupToggles();
+	};
+
+	initEvents();
+	checkValidity();
 };
