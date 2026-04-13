@@ -53,15 +53,27 @@
 		gap: 16px;
 	}
 
+	.input-group {
+		width: 100%;
+		display: flex;
+
+		textarea {
+			min-height: 129px;
+
+			@media(min-width: v.$lg) {
+				min-height: 169px;
+			}
+		}
+	}
+
 	.input-group,
 	.inputs-group {
-
 		label,
 		.label-text,
 		.dropdown-label {
 			color: v.$c-black;
 
-			@include t.t-text
+			@include t.t-text;
 		}
 	}
 
@@ -217,19 +229,6 @@
 		}
 	}
 
-	.input-group {
-		width: 100%;
-		display: flex;
-
-		textarea {
-			min-height: 129px;
-
-			@media(min-width: v.$lg) {
-				min-height: 169px;
-			}
-		}
-	}
-
 	.submit-buttons-wrapper {
 		width: 100%;
 		display: flex;
@@ -280,11 +279,11 @@
 	}
 
 	input[type="number"] {
-		-moz-appearance: textfield;
+		appearance: textfield;
 
 		&::-webkit-outer-spin-button,
 		&::-webkit-inner-spin-button {
-			-webkit-appearance: none;
+			appearance: none;
 			margin: 0;
 		}
 	}

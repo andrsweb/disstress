@@ -52,7 +52,6 @@
 
 				@media(min-width: v.$md) {
 					border-bottom-left-radius: v.$br12;
-					border-top-right-radius: v.$br12;
 					border-top-right-radius: 0;
 				}
 			}
@@ -99,6 +98,10 @@
 
 				@include l.t-label;
 			}
+		}
+
+		&-title a {
+			color: v.$c-black;
 		}
 
 		&-title {

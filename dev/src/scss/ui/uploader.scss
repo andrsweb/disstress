@@ -14,10 +14,10 @@
 		justify-content: space-between;
 		margin-bottom: 12px;
 
-		h3 {
-			font-size: 16px;
-			font-weight: 400;
+		h2 {
 			color: v.$c-black;
+
+			@include t.t-text;
 		}
 
 		.browse-link,
@@ -77,6 +77,7 @@
 				text-align: center;
 				color: v.$c-text-grey;
 				cursor: pointer;
+
 				@include t.t-text;
 
 				span {

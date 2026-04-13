@@ -25,7 +25,7 @@ const initFormInteractions = () => {
 	};
 
 	const checkValidity = () => {
-		const requiredElements = form.querySelectorAll('[required]');
+		const requiredElements = form.querySelectorAll('[required], [data-required]');
 		const isFormValid = Array.from(requiredElements).every(el =>
 			el.type === 'checkbox' ? el.checked : el.value.trim() !== ''
 		);
