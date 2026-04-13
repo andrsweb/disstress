@@ -2,7 +2,7 @@
     <div class="container">
         <div class="submit-unit-wrapper">
             <h1>Add new property</h1>
-            <form class="submit-unit-form">
+            <form class="submit-unit-form" autocomplete="off" method="POST" enctype="multipart/form-data">
                 <div class="submit-unit-inner">
                     <div class="submit-unit-left">
                         <fieldset>
@@ -65,7 +65,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <input type="hidden" name="unit_type" value="">
+                                        <input type="hidden" name="unit_type" value="" required>
                                     </div>
                                 </div>
                                 <div class="input-group">
@@ -100,7 +100,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <input type="hidden" name="property" value="">
+                                        <input type="hidden" name="property" value="" required>
                                     </div>
                                 </div>
                             </div>
@@ -114,7 +114,7 @@
                                         <button type="button" class="beds-baths-btn" data-beds="4">4</button>
                                         <button type="button" class="beds-baths-btn" data-beds="5">5+</button>
                                     </div>
-                                    <input type="hidden" name="bedrooms" value="">
+                                    <input type="hidden" name="bedrooms" value="" required>
                                 </div>
                                 <div class="submit-buttons-wrapper">
                                     <span class="dropdown-label">Bathrooms</span>
@@ -124,7 +124,7 @@
                                         <button type="button" class="beds-baths-btn" data-baths="3">3</button>
                                         <button type="button" class="beds-baths-btn" data-baths="4">4</button>
                                     </div>
-                                    <input type="hidden" name="bathrooms" value="">
+                                    <input type="hidden" name="bathrooms" value="" required>
                                 </div>
                             </div>
                             <div class="input-group">
@@ -142,12 +142,47 @@
                             </button>
                         </div>
                     </div>
-                    <div class="submit-unit-right"></div>
+                    <div class="submit-unit-right">
+                        <div class="uploader">
+                            <div class="uploader-user" id="uploader-user">
+                                <div class="uploader-header" id="user-header">
+                                    <h3>Pictures</h3>
+                                    <button type="button" class="browse-link" id="trigger-browse">Browse files</button>
+                                </div>
+                                <div class="uploader-dropzone" id="uploader-dropzone">
+                                    <input type="file" class="filepond" name="filepond" multiple
+                                           data-max-file-size="10MB" data-max-files="50">
+                                </div>
+                                <div class="uploader-grid" id="user-grid">
+                                    <!-- Сюда будут рендерится загруженные фото юзера. Не удалять -->
+                                </div>
+                            </div>
+
+                            <div class="uploader-presets">
+                                <div class="uploader-header">
+                                    <h3>Select property pictures to include in unit page</h3>
+                                    <button type="button" class="select-all" id="select-all-images">Select all</button>
+                                </div>
+                                <div class="uploader-grid" id="presets-grid">
+                                    <!-- По идее циклом должен вывести все -->
+
+                                    <div class="uploader-item is-selected" data-id="p1" data-url="/img/h1.jpg">
+                                        <img src="/img/h1.jpg" alt="Property image">
+                                    </div>
+
+                                    <div class="uploader-item" data-id="p2" data-url="/img/h2.jpg">
+                                        <img src="/img/h2.jpg" alt="Property image">
+                                    </div>
+
+                                    <div class="uploader-item" data-id="p3" data-url="/img/h3.jpg">
+                                        <img src="/img/h3.jpg" alt="Property image">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-
             </form>
         </div>
-
     </div>
 </section>
