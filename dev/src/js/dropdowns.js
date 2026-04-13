@@ -47,6 +47,8 @@ const toggleDropdown = () => {
 		if (title) title.textContent = option.textContent
 		if (hiddenInput) {
 			hiddenInput.value = option.getAttribute('data-value') || option.textContent
+
+			hiddenInput.dispatchEvent(new Event('input', {bubbles: true}))
 			hiddenInput.dispatchEvent(new Event('change', {bubbles: true}))
 		}
 
