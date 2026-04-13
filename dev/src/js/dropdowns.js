@@ -1,4 +1,4 @@
-import { reCalculateDropdownHeight } from "./common/common.js";
+import {reCalculateDropdownHeight} from "./common/common.js";
 
 document.addEventListener('DOMContentLoaded', () => {
 	'use strict'
@@ -32,6 +32,28 @@ const toggleDropdown = () => {
 				dropdownOpen.style.height = '0'
 			}
 		})
+	})
+
+	document.addEventListener('click', (e) => {
+		const option = e.target.closest('.dropdown-option')
+		if (!option) return
+
+		const dropdown = option.closest('.dropdown')
+		const button = dropdown.querySelector('.dropdown-button')
+		const title = button.querySelector('.dropdown-title')
+		const dropdownOpen = dropdown.querySelector('.dropdown-content')
+		const hiddenInput = dropdown.closest('.input-wrapper')?.querySelector('input[type="hidden"]')
+
+		if (title) title.textContent = option.textContent
+		if (hiddenInput) {
+			hiddenInput.value = option.getAttribute('data-value') || option.textContent
+			hiddenInput.dispatchEvent(new Event('change', {bubbles: true}))
+		}
+
+		dropdown.classList.remove('opened')
+		if (dropdownOpen) dropdownOpen.style.height = '0'
+
+		dropdown.dispatchEvent(new CustomEvent('change', {detail: {value: option.textContent}}))
 	})
 }
 
