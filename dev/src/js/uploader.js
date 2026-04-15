@@ -17,16 +17,8 @@ export const initUploader = () => {
 	if (!uGrid || !pGrid) return;
 
 	const syncToHidden = () => {
-		const form = pondInput.closest('form');
-		if (!form) return;
-
-		let hidden = form.querySelector('input[name="final_image_selection"]');
-		if (!hidden) {
-			hidden = document.createElement('input');
-			hidden.type = 'hidden';
-			hidden.name = 'final_image_selection';
-			form.appendChild(hidden);
-		}
+		const hidden = document.querySelector('input[name="final_image_selection"]');
+		if (!hidden) return;
 
 		const userIds = Array.from(uGrid.querySelectorAll('.uploader-item')).map(el => el.dataset.id);
 		const presetIds = Array.from(pGrid.querySelectorAll('.uploader-item.is-selected')).map(el => el.dataset.id);
@@ -38,7 +30,7 @@ export const initUploader = () => {
 		};
 
 		hidden.value = JSON.stringify(payload);
-		hidden.dispatchEvent(new Event('change', {bubbles: true}));
+		hidden.dispatchEvent(new Event('change', { bubbles: true }));
 	};
 
 	if (pondInput.dataset.uploaderInitialized) {
@@ -73,7 +65,8 @@ export const initUploader = () => {
 
 	const createItemEl = (file) => {
 		const el = document.createElement('div');
-		el.className = `uploader-item ${file.canDelete ? 'is-uploaded' : (file.isSelected ? 'is-selected' : '')}`;
+
+		el.className = 'uploader-item' + (file.canDelete ? ' is-uploaded' : '');
 		el.dataset.id = file.id;
 
 		const img = document.createElement('img');
@@ -98,6 +91,7 @@ export const initUploader = () => {
 
 		if (uHeader) uHeader.classList.toggle('is-visible', hasUserFiles);
 		if (dropzone) dropzone.classList.toggle('is-hidden', hasUserFiles);
+
 		syncToHidden();
 	};
 
@@ -140,14 +134,16 @@ export const initUploader = () => {
 	});
 
 	[uGrid, pGrid].forEach(grid => {
-		Sortable.create(grid, {
+		new Sortable(grid, {
 			animation: 150,
 			ghostClass: 'sortable-ghost',
-			onEnd: () => syncToHidden()
+
+			onEnd: () => {
+				syncToHidden();
+			}
 		});
 	});
 
-	// Initial syc
 	syncToHidden();
 };
 
