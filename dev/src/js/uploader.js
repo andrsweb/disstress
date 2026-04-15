@@ -20,6 +20,8 @@ const initUploader = () => {
 
     if (!uGrid || !pGrid) return;
 
+    const getPresetsGrid = () => document.getElementById('presets-grid') || pGrid;
+
     FilePond.registerPlugin(FilePondPluginImagePreview);
 
     let userFiles = [];
@@ -29,6 +31,23 @@ const initUploader = () => {
         isSelected: el.classList.contains('is-selected'),
         canDelete: false
     }));
+
+    const syncPresetsFromDom = () => {
+        presets = Array.from(getPresetsGrid().querySelectorAll('.uploader-item'))
+            .map((el) => {
+                const id = el.dataset.id;
+                const url = el.dataset.url;
+                if (!id || !url) return null;
+
+                return {
+                    id,
+                    url,
+                    isSelected: el.classList.contains('is-selected'),
+                    canDelete: false
+                };
+            })
+            .filter(Boolean);
+    };
 
     const syncToHidden = () => {
         if (!form) return;
@@ -57,6 +76,7 @@ const initUploader = () => {
         const el = document.createElement('div');
         el.className = `uploader-item ${file.canDelete ? 'is-uploaded' : (file.isSelected ? 'is-selected' : '')}`;
         el.dataset.id = file.id;
+        el.dataset.url = file.url;
 
         const img = document.createElement('img');
         img.src = file.url;
@@ -73,12 +93,6 @@ const initUploader = () => {
                 pond.removeFile(file.id);
             });
             el.append(delBtn);
-        } else {
-            el.addEventListener('click', () => {
-                file.isSelected = !file.isSelected;
-                el.classList.toggle('is-selected', file.isSelected);
-                syncToHidden();
-            });
         }
         return el;
     };
@@ -125,11 +139,42 @@ const initUploader = () => {
         }
     });
 
-    document.getElementById('trigger-browse')?.addEventListener('click', () => pond.browse());
-    document.getElementById('select-all-images')?.addEventListener('click', () => {
-        const areAllSelected = presets.every(f => f.isSelected);
-        presets.forEach(f => f.isSelected = !areAllSelected);
-        render();
+    document.addEventListener('click', (e) => {
+        const browseBtn = e.target.closest('#trigger-browse');
+        if (browseBtn) {
+            pond.browse();
+
+            return;
+        }
+
+        const selectAllBtn = e.target.closest('#select-all-images');
+        if (selectAllBtn) {
+            syncPresetsFromDom();
+
+            const areAllSelected = presets.every(f => f.isSelected);
+            presets.forEach(f => f.isSelected = !areAllSelected);
+
+            render();
+
+            return;
+        }
+
+        const item = e.target.closest('.uploader-item');
+        if (!item) return;
+
+        const currentPGrid = getPresetsGrid();
+        if (!currentPGrid.contains(item)) return;
+
+        syncPresetsFromDom();
+
+        const preset = presets.find((f) => f.id === item.dataset.id);
+
+        if (!preset) return;
+
+        preset.isSelected = !preset.isSelected;
+        item.classList.toggle('is-selected', preset.isSelected);
+
+        syncToHidden();
     });
 
     [uGrid, pGrid].forEach(grid => {
