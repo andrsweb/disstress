@@ -25,6 +25,9 @@ const initUploader = () => {
     FilePond.registerPlugin(FilePondPluginImagePreview);
 
     let userFiles = [];
+    if (defaultUserFiles) {
+        userFiles = defaultUserFiles;
+    }
     let presets = Array.from(pGrid.querySelectorAll('.uploader-item')).map(el => ({
         id: el.dataset.id,
         url: el.dataset.url,
@@ -69,7 +72,7 @@ const initUploader = () => {
         };
 
         hidden.value = JSON.stringify(payload);
-        hidden.dispatchEvent(new Event('change', { bubbles: true }));
+        hidden.dispatchEvent(new Event('change', {bubbles: true}));
     };
 
     const createItemEl = (file) => {
@@ -91,6 +94,14 @@ const initUploader = () => {
             delBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 pond.removeFile(file.id);
+                if (file.isOldImage) {
+                    let item = document.querySelector('.uploader-item[data-id="' + file.id + '"]'),
+                        userThumbnailIds = document.getElementById('user-thumbnail-ids');
+                    item?.remove();
+                    userThumbnailIds.value = userThumbnailIds.value.replace(file.id + ',', '');
+                    userFiles = userFiles.filter(f => f.id !== file.id);
+                    render();
+                }
             });
             el.append(delBtn);
         }
@@ -100,7 +111,7 @@ const initUploader = () => {
     const render = () => {
         uGrid.innerHTML = '';
         userFiles.forEach(f => uGrid.append(createItemEl(f)));
-        
+
         const hasUserFiles = userFiles.length > 0;
         if (uHeader) uHeader.classList.toggle('is-visible', hasUserFiles);
         if (dropzone) dropzone.classList.toggle('is-hidden', hasUserFiles);
@@ -115,9 +126,60 @@ const initUploader = () => {
         allowMultiple: true,
         maxFiles: 50,
         labelIdle: 'Drag and drop images here or <span>Browse files</span>',
-        instantUpload: false,
+        instantUpload: true,
         storeAsFile: true,
     });
+
+    if (ajax_object) {
+        let userThumbnailIds = document.getElementById('user-thumbnail-ids');
+
+        pond.setOptions({
+            server: {
+                process: {
+                    url: ajax_object.ajax_url,
+                    method: 'POST',
+                    withCredentials: false,
+                    ondata: (formData) => {
+                        formData.append('action', 'upload_user_images');
+                        return formData;
+                    },
+                    onload: (response) => {
+                        const data = JSON.parse(response);
+
+                        if (data.success && data.data && data.data.attachment_id) {
+                            userThumbnailIds.value += data.data.attachment_id + ',';
+
+                            userFiles.find(f => f.attachmentId === null).attachmentId = data.data.attachment_id;
+
+                            return String(data.data.attachment_id);
+                        }
+
+                        throw new Error('Upload failed');
+                    },
+                    onerror: (response) => {
+                        try {
+                            const data = JSON.parse(response);
+                            return data?.data?.message || 'Upload error';
+                        } catch (e) {
+                            return 'Upload error';
+                        }
+                    }
+                },
+            },
+        });
+
+        pond.on('addfilestart', () => {
+            uGrid.classList.add('preloader');
+        });
+
+        pond.on('processfile', (error, file) => {
+            uGrid.classList.remove('preloader');
+        });
+
+        pond.on('processfileabort', () => {
+            uGrid.classList.remove('preloader');
+        });
+    }
 
     pond.on('addfile', (err, file) => {
         if (err || userFiles.some(f => f.id === file.id)) return;
@@ -125,7 +187,8 @@ const initUploader = () => {
             id: file.id,
             url: URL.createObjectURL(file.file),
             isSelected: true,
-            canDelete: true
+            canDelete: true,
+            attachmentId: null,
         });
         render();
     });
@@ -133,9 +196,46 @@ const initUploader = () => {
     pond.on('removefile', (err, file) => {
         const idx = userFiles.findIndex(f => f.id === file.id);
         if (idx > -1) {
-            URL.revokeObjectURL(userFiles[idx].url);
-            userFiles.splice(idx, 1);
-            render();
+            uGrid.classList.add('preloader');
+            if (ajax_object && userFiles[idx].attachmentId) {
+                let formData = new FormData(),
+                    userThumbnailIds = document.getElementById('user-thumbnail-ids');
+
+                formData.append('action', 'remove_user_images');
+                formData.append('_ajax_nonce', ajax_object._ajax_nonce);
+                formData.append('attachment_id', userFiles[idx].attachmentId);
+
+                fetch(ajax_object.ajax_url, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                })
+                    .then(response => response.json())
+                    .then(response => {
+                        if (response.success) {
+                            userThumbnailIds.value = userThumbnailIds.value.replace(userFiles[idx].attachmentId + ',', '');
+
+                            URL.revokeObjectURL(userFiles[idx].url);
+                            userFiles.splice(idx, 1);
+                            render();
+                        }
+                        setTimeout(() => {
+                            uGrid.classList.remove('preloader');
+                        }, 700);
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        setTimeout(() => {
+                            uGrid.classList.remove('preloader');
+                        }, 700);
+                    });
+            } else {
+                URL.revokeObjectURL(userFiles[idx].url);
+                userFiles.splice(idx, 1);
+                render();
+            }
         }
     });
 
@@ -173,7 +273,6 @@ const initUploader = () => {
 
         preset.isSelected = !preset.isSelected;
         item.classList.toggle('is-selected', preset.isSelected);
-
         syncToHidden();
     });
 

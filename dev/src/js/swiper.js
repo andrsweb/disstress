@@ -49,7 +49,7 @@ const initSwiperThumbs = () => {
 	});
 };
 
-const initSingleSwiper = () => {
+export const initSingleSwiper = () => {
 	new Swiper('.single-swiper', {
 		modules: [Navigation],
 		slidesPerView: 1,

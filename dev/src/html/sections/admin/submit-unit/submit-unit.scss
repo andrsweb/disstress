@@ -106,7 +106,6 @@
 
 		@media(min-width: v.$md) {
 			flex-direction: row;
-			align-items: center;
 		}
 
 		.input-group {
@@ -143,9 +142,13 @@
 	}
 
 	.sqrt-value {
-		color: v.$c-black;
+		color: v.$c-text-grey;
 
 		@include t.t-text;
+
+		span {
+			color: v.$c-black-total;
+		}
 	}
 
 	.dropdown {
@@ -240,12 +243,13 @@
 	.submit-buttons {
 		width: 100%;
 		display: flex;
+		flex-wrap: wrap;
 		align-items: center;
 		gap: 7px;
 	}
 
 	.beds-baths-btn {
-		width: 50px;
+		min-width: 50px;
 		height: 50px;
 		display: flex;
 		align-items: center;

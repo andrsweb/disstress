@@ -177,7 +177,7 @@
 				height: 24px;
 				background-color: v.$c-green;
 				border-radius: 50%;
-				background-image: url('/img/check-white.svg');
+				background-image: url('../img/check-white.svg');
 				background-repeat: no-repeat;
 				background-position: center;
 				background-size: 10px;
@@ -201,7 +201,7 @@
 			opacity: 1;
 			transition: scale ease-in-out v.$tr;
 			z-index: 10;
-			background-image: url('/img/cross.svg');
+			background-image: url('../img/cross.svg');
 			background-repeat: no-repeat;
 			background-position: center;
 			background-size: 16px;

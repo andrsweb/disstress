@@ -1,3 +1,5 @@
+import {initSingleSwiper} from "./swiper.js";
+
 document.addEventListener('DOMContentLoaded', () => {
     'use strict'
     void initSearchResultsFilters()
@@ -270,6 +272,7 @@ const updatePropertiesList = () => {
                 resultsBlock.innerHTML = response.data.properties;
                 h2Block.innerHTML = response.data.properties_found;
                 updateUrl();
+                initSingleSwiper();
             }
             setTimeout(() => {
                 resultsBlock.classList.remove('preloader');
