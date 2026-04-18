@@ -104,7 +104,7 @@ const initSearchResultsFilters = async () => {
 
         const currentLabel = (valueEl.querySelector('[data-value-text]')?.textContent ?? valueEl.textContent ?? '').trim().toLowerCase()
         const initial = options.find((opt) => (opt?.label ?? '').trim().toLowerCase() === currentLabel)
-        const initialValue = initial?.value ?? options[0]?.value ?? ''
+        const initialValue = (!button.dataset.selectedValue && initial?.value) ? options[0]?.value : button.dataset.selectedValue
 
         applySelection(button, filterKey, initialValue)
         renderDropdown(button)
@@ -171,6 +171,24 @@ const initSearchResultsFilters = async () => {
         let selectedBeds = new Set(), selectedBaths = new Set()
         let tempBeds = new Set(), tempBaths = new Set()
 
+        if (filters.beds) {
+            filters.beds.options.forEach(opt => {
+                if (opt.active) {
+                    selectedBeds.add(opt.value)
+                    tempBeds.add(opt.value)
+                }
+            });
+        }
+
+        if (filters.baths) {
+            filters.baths.options.forEach(opt => {
+                if (opt.active) {
+                    selectedBaths.add(opt.value)
+                    tempBaths.add(opt.value)
+                }
+            });
+        }
+
         const updateDisplay = () => {
             bbText.textContent = getBedsBathsText(selectedBeds, selectedBaths)
             bbBedsInp.value = Array.from(selectedBeds).join(',')
@@ -232,8 +250,6 @@ const updatePropertiesList = () => {
         formData = new FormData(),
         resultsBlock = document.getElementById('result-tabs-list-panel'),
         h2Block = document.querySelector('.title-top h2'),
-        bedsValueInput = filterItem?.querySelector('input[name="beds"]'),
-        bathsValueInput = filterItem?.querySelector('input[name="baths"]'),
         action = filterItem?.querySelector('input[name="action"]'),
         allInputs = filterItem?.querySelectorAll('input');
 
@@ -247,17 +263,16 @@ const updatePropertiesList = () => {
 
     allInputs.forEach(input => {
         if (!formData.has(input.name)) {
-            formData.append(input.name, input.value.replace(/,/g, ''));
+            let value = input.value;
+            if ('min_price' === input.name || 'max_price' === input.name) {
+                value = value.replace(/[^0-9.]/g, '');
+            }
+            formData.append(input.name, value);
         }
     });
 
-    if (bedsValueInput) {
-        formData.append('beds', bedsValueInput.value);
-    }
-
-    if (bathsValueInput) {
-        formData.append('baths', bathsValueInput.value);
-    }
+    let urlWithFilters = getUrlWithFilters(formData);
+    formData.append('current_href', urlWithFilters);
 
     fetch(ajax_object.ajax_url, {
         method: 'POST',
@@ -271,8 +286,8 @@ const updatePropertiesList = () => {
             if (response.success) {
                 resultsBlock.innerHTML = response.data.properties;
                 h2Block.innerHTML = response.data.properties_found;
-                updateUrl();
                 initSingleSwiper();
+                history.replaceState({}, '', urlWithFilters);
             }
             setTimeout(() => {
                 resultsBlock.classList.remove('preloader');
@@ -288,8 +303,21 @@ const updatePropertiesList = () => {
 /**
  * Remove from URl pagination like /page-2/ and add to URL all filter parameters as GET params
  */
-const updateUrl = () => {
-    const currentHref = document.querySelector('input[name="current_href"]')?.value.replace(/\/page-\d+(?=\/|$)/g, '');
-    console.log(currentHref);
-    history.replaceState({}, '', currentHref);
+const getUrlWithFilters = (formData) => {
+    let currentHref = window.location.href.replace(/\/page-\d+(?=\/|$)/g, '');
+
+    currentHref = currentHref.replace(/[?&]+([^=&]+)=([^&]*)/gi, '');
+    currentHref += '?filtered=true';
+
+    formData.forEach((value, key) => {
+        if (0 === value.length) {
+            return;
+        }
+
+        if (key !== 'action' && key !== '_ajax_nonce' && key !== '_wp_http_referer' && key !== 'current_href') {
+            currentHref += `&${key}=${value}`;
+        }
+    });
+
+    return currentHref;
 }
