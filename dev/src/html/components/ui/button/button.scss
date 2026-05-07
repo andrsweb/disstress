@@ -10,8 +10,12 @@
 	flex-shrink: 0;
 	gap: 7px;
 	border-radius: v.$br8;
-	text-transform: uppercase;
 	outline: 3px solid transparent;
+
+	&:disabled {
+		opacity: 0.6;
+		cursor: not-allowed;
+	}
 
 	&.black {
 		background-color: v.$c-black;
@@ -168,9 +172,22 @@
 			scale: 1;
 		}
 	}
+
+	&.full-width {
+		width: 100%;
+	}
 }
 
 .link {
 	color: v.$c-black;
 	text-decoration: underline;
+
+	&.logout {
+		padding: 0 30px;
+		font-size: 14px;
+	}
+}
+
+.edit-property-link {
+	margin-bottom: 0;
 }

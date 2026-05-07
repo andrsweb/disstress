@@ -120,5 +120,30 @@
 		.dropdown-arrow {
 			transform: rotate(180deg);
 		}
+
+		.dropdown-search {
+			display: flex;
+		}
+	}
+
+	&-search {
+		position: absolute;
+		top: 0;
+		width: calc(100% - 30px);
+		display: none;
+
+		&-input {
+			width: 98%;
+			margin: auto;
+			padding: 10px 16px;
+
+			&::placeholder {
+				color: v.$c-grey;
+			}
+		}
+	}
+
+	&-option.hidden {
+		display: none;
 	}
 }

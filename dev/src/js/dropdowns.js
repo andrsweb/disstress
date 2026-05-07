@@ -32,6 +32,8 @@ const toggleDropdown = () => {
 				dropdownOpen.style.height = '0'
 			}
 		})
+
+		initSearch(button);
 	})
 
 	document.addEventListener('click', (e) => {
@@ -56,6 +58,31 @@ const toggleDropdown = () => {
 		if (dropdownOpen) dropdownOpen.style.height = '0'
 
 		dropdown.dispatchEvent(new CustomEvent('change', {detail: {value: option.textContent}}))
+	})
+}
+
+const initSearch = (button) => {
+	const dropdown = button.closest('.dropdown')
+	const searchInput = dropdown.querySelector('.dropdown-search input')
+	if (!searchInput) return
+
+	const options = dropdown.querySelectorAll('.dropdown-option')
+	if (!options.length) return
+
+	searchInput.addEventListener('input', () => {
+		const searchValue = searchInput.value.toLowerCase()
+
+		options.forEach(option => {
+			const optionText = option.textContent.toLowerCase()
+
+			if (optionText.includes(searchValue)) {
+				option.classList.remove('hidden')
+			} else {
+				option.classList.add('hidden')
+			}
+		})
+
+		reCalculateDropdownHeight(dropdown)
 	})
 }
 
