@@ -54,7 +54,7 @@
 			color: v.$c-text-grey;
 		}
 
-		a,address {
+		a, address {
 			color: v.$c-black;
 		}
 	}
@@ -167,5 +167,10 @@
 				min-width: 300px;
 			}
 		}
+	}
+
+	button svg,
+	button svg path {
+		fill: #FFF;
 	}
 }

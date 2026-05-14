@@ -9,6 +9,7 @@
 	padding: 4px 5px;
 	border-top-right-radius: v.$br8;
 	border-bottom-left-radius: v.$br8;
+	gap: 4px;
 
 	@include t.t-smallest(true);
 

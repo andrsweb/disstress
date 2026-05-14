@@ -74,6 +74,17 @@
 		background-color: v.$c-green;
 		color: v.$c-white;
 
+		&.xs {
+			padding: 6px 8px;
+			border: none;
+			font-size: 13px;
+
+			img {
+				width: 16px;
+				height: 16px;
+			}
+		}
+
 		&.sm {
 			padding: 9.5px 12px;
 			border: none;
@@ -106,6 +117,10 @@
 					width: 24px;
 				}
 			}
+		}
+
+		&.text_white {
+			color: #FFF;
 		}
 
 		@include g.hover {

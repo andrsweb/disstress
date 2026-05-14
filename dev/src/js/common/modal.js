@@ -109,6 +109,7 @@ class ModalManager {
 
 			if (modal) {
 				this.openModal(modal);
+				this.cloneAttributes(modal, event.target);
 			}
 
 			event.preventDefault();
@@ -128,8 +129,8 @@ class ModalManager {
 			return;
 		}
 
-		const backdrop  = target.closest('.modal-wrapper');
-		const isModal   = target.closest('.modal');
+		const backdrop = target.closest('.modal-wrapper');
+		const isModal = target.closest('.modal');
 
 		if (backdrop && backdrop === target && !isModal) this.closeModal(backdrop);
 	}
@@ -140,5 +141,23 @@ class ModalManager {
 		}
 
 		this.closeTopModal();
+	}
+
+	cloneAttributes(modal, target) {
+		if (!modal || !target) {
+			return;
+		}
+
+		const attributes = target.attributes;
+		if (!attributes) {
+			return;
+		}
+
+		for (let i = 0; i < attributes.length; i++) {
+			const attribute = attributes[i];
+			if (attribute.name.startsWith("data-") && attribute.name !== this.ATTRIBUTE_OPEN) {
+				modal.setAttribute(attribute.name, attribute.value);
+			}
+		}
 	}
 }

@@ -25,7 +25,7 @@ export const reCalculateDropdownHeight = dropdown => {
 		dropdownInner = dropdown.querySelector('.dropdown-inner')
 
 	if (!dropdownOpen || !dropdownInner) return
-console.log(dropdownInner.getBoundingClientRect().height);
+
 	dropdownOpen.style.height = `${dropdownInner.getBoundingClientRect().height}px`
 }
 

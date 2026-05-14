@@ -18,7 +18,7 @@
 	pointer-events: none;
 	transition: opacity v.$tr ease, visibility v.$tr ease;
 	overflow-y: auto;
-	z-index: 300;
+	z-index: 100;
 
 	.modal {
 		width: 100%;
@@ -43,6 +43,13 @@
 		.gallery-modal-counter {
 			display: none;
 		}
+
+		&.preloader {
+			&::before {
+				top: 0;
+				border-radius: 16px;
+			}
+		}
 	}
 
 	&-active {
@@ -52,7 +59,7 @@
 	}
 
 	&.dark {
-		background-color: v.$c-black-total;
+		background-color: v.$c-black;
 	}
 }
 

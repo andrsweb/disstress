@@ -29,7 +29,10 @@ const initUploader = () => {
 		userFiles = defaultUserFiles;
 	}
 	let presets = Array.from(pGrid.querySelectorAll('.uploader-item')).map(el => ({
-		id: el.dataset.id, url: el.dataset.url, isSelected: el.classList.contains('is-selected'), canDelete: false
+		id: el.dataset.id,
+		url: el.dataset.url,
+		isSelected: el.classList.contains('is-selected'),
+		canDelete: false
 	}));
 
 	const syncPresetsFromDom = () => {
@@ -40,7 +43,10 @@ const initUploader = () => {
 				if (!id || !url) return null;
 
 				return {
-					id, url, isSelected: el.classList.contains('is-selected'), canDelete: false
+					id,
+					url,
+					isSelected: el.classList.contains('is-selected'),
+					canDelete: false
 				};
 			})
 			.filter(Boolean);
@@ -59,7 +65,10 @@ const initUploader = () => {
 		const payload = {
 			user: userFiles.map(f => f.id),
 			presets: presets.filter(f => f.isSelected).map(f => f.id),
-			fullOrder: [...userFiles.map(f => f.id), ...presets.filter(f => f.isSelected).map(f => f.id)]
+			fullOrder: [
+				...userFiles.map(f => f.id),
+				...presets.filter(f => f.isSelected).map(f => f.id)
+			]
 		};
 
 		hidden.value = JSON.stringify(payload);
@@ -127,14 +136,18 @@ const initUploader = () => {
 		pond.setOptions({
 			server: {
 				process: {
-					url: ajax_object.ajax_url, method: 'POST', withCredentials: false, ondata: (formData) => {
+					url: ajax_object.ajax_url,
+					method: 'POST',
+					withCredentials: false,
+					ondata: (formData) => {
 						formData.append('action', 'upload_user_images');
 						return formData;
-					}, onload: (response) => {
+					},
+					onload: (response) => {
 						const data = JSON.parse(response);
 
 						if (data.success && data.data && data.data.attachment_id) {
-							userThumbnailIds.value += ',' + data.data.attachment_id;
+							userThumbnailIds.value += data.data.attachment_id + ',';
 
 							userFiles.find(f => f.attachmentId === null).attachmentId = data.data.attachment_id;
 
@@ -142,7 +155,8 @@ const initUploader = () => {
 						}
 
 						throw new Error('Upload failed');
-					}, onerror: (response) => {
+					},
+					onerror: (response) => {
 						try {
 							const data = JSON.parse(response);
 							return data?.data?.message || 'Upload error';
@@ -170,7 +184,11 @@ const initUploader = () => {
 	pond.on('addfile', (err, file) => {
 		if (err || userFiles.some(f => f.id === file.id)) return;
 		userFiles.push({
-			id: file.id, url: URL.createObjectURL(file.file), isSelected: true, canDelete: true, attachmentId: null,
+			id: file.id,
+			url: URL.createObjectURL(file.file),
+			isSelected: true,
+			canDelete: true,
+			attachmentId: null,
 		});
 		render();
 	});
@@ -180,21 +198,24 @@ const initUploader = () => {
 		if (idx > -1) {
 			uGrid.classList.add('preloader');
 			if (ajax_object && userFiles[idx].attachmentId) {
-				let formData = new FormData(), userThumbnailIds = document.getElementById('user-thumbnail-ids');
+				let formData = new FormData(),
+					userThumbnailIds = document.getElementById('user-thumbnail-ids');
 
 				formData.append('action', 'remove_user_images');
 				formData.append('_ajax_nonce', ajax_object._ajax_nonce);
 				formData.append('attachment_id', userFiles[idx].attachmentId);
 
 				fetch(ajax_object.ajax_url, {
-					method: 'POST', body: formData, headers: {
+					method: 'POST',
+					body: formData,
+					headers: {
 						'Accept': 'application/json'
 					}
 				})
 					.then(response => response.json())
 					.then(response => {
 						if (response.success) {
-							userThumbnailIds.value = userThumbnailIds.value.replace(userFiles[idx].attachmentId, '');
+							userThumbnailIds.value = userThumbnailIds.value.replace(userFiles[idx].attachmentId + ',', '');
 
 							URL.revokeObjectURL(userFiles[idx].url);
 							userFiles.splice(idx, 1);
@@ -257,7 +278,9 @@ const initUploader = () => {
 
 	[uGrid, pGrid].forEach(grid => {
 		Sortable.create(grid, {
-			animation: 150, ghostClass: 'sortable-ghost', onEnd: () => {
+			animation: 150,
+			ghostClass: 'sortable-ghost',
+			onEnd: () => {
 				const newOrderIds = Array.from(grid.querySelectorAll('.uploader-item')).map(el => el.dataset.id);
 				if (grid === uGrid) {
 					userFiles = newOrderIds.map(id => userFiles.find(f => f.id === id)).filter(Boolean);

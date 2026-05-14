@@ -68,6 +68,7 @@
 		border: 1px solid v.$c-grey-95;
 		border-bottom-left-radius: v.$br8;
 		border-bottom-right-radius: v.$br8;
+		cursor: pointer;
 
 		@media(min-width: v.$md) {
 			border-left: 0;
