@@ -101,7 +101,7 @@
 		width: 100%;
 		height: 0;
 		max-height: 300px;
-		overflow: scroll;
+		overflow: auto;
 		transition: height ease v.$tr;
 
 		&-row {

@@ -107,6 +107,12 @@ class ModalManager {
 			const id = openTrigger.getAttribute(this.ATTRIBUTE_OPEN);
 			const modal = this.getModalById(id);
 
+			if (0 < this.openModals.size) {
+				this.openModals.forEach((openModal) => {
+					this.closeModal(openModal);
+				});
+			}
+
 			if (modal) {
 				this.openModal(modal);
 				this.cloneAttributes(modal, event.target);

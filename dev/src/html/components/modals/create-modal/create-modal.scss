@@ -63,6 +63,10 @@
 		@include p.t-text;
 	}
 
+	label {
+		position: relative;
+	}
+
 	&-inner {
 		width: 100%;
 		display: flex;

@@ -95,6 +95,16 @@ fieldset {
 	}
 }
 
+.input-group {
+	label {
+		position: relative;
+	}
+}
+
+.dropdown-label {
+	position: relative;
+}
+
 .inputs-box {
 	width: 100%;
 	display: flex;
@@ -321,7 +331,6 @@ input[type="number"] {
 		gap: 0 !important;
 		height: auto;
 		max-height: 300px;
-		overflow-x: scroll;
 
 		button {
 			width: 100%;
