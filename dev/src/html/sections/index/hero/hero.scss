@@ -25,19 +25,28 @@
 
 	&-wrapper {
 		display: flex;
-		flex-direction: column-reverse;
 		align-items: flex-start;
 		gap: 10px;
 		padding: 40px 0;
 
 		@media(min-width: v.$xm) {
-			flex-direction: row;
 			align-items: center;
 			justify-content: space-between;
+			gap: 40px;
 		}
 
 		@media(min-width: v.$lg) {
 			padding: 60px 10px 60px 20px;
+		}
+
+		@media(max-width: v.$lg) {
+			flex-direction: column-reverse;
+		}
+
+		@media(max-width: v.$xm) {
+			padding:  0 0 40px 0;
+			flex-direction: column;
+			gap: 20px;
 		}
 	}
 
@@ -92,10 +101,6 @@
 		width: 100%;
 		flex: 1;
 
-		@media(min-width: v.$xm) {
-			display: none;
-		}
-
 		@media(min-width: v.$md) {
 			display: block;
 		}
@@ -107,17 +112,18 @@
 
 	&-img {
 		width: 100%;
+		min-height: 400px;
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		background-image: url("../img/distress-banner.webp");
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: contain;
 
-		img {
-			max-width: 100%;
-			height: auto;
-
-			@media(min-width: v.$xl) {
-				max-width: 609px;
-			}
+		@media(max-width: v.$xm) {
+			min-height: auto;
+			background-image: none;
 		}
 	}
 }

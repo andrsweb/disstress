@@ -9,8 +9,12 @@ const initFormInteractions = () => {
 	if (!form) return;
 
 	const priceInp = form.querySelector('#s-price');
+	const originalPriceInp = form.querySelector('#o-price');
+	const discountInp = form.querySelector('input[name="discount"]');
+	const pricePerSquareInp = form.querySelector('input[name="price_per_square"]');
 	const areaInp = form.querySelector('#s-sqrt');
-	const resultSpan = form.querySelector('[data-sqrt-value] span');
+	const resultSpan = form.querySelector('span.sqrt-value span');
+	const discountSpan = form.querySelector('span.discount-value span');
 	const submitBtn = form.querySelector('button[type="submit"]');
 
 	if (!priceInp || !areaInp || !resultSpan || !submitBtn) return;
@@ -21,8 +25,29 @@ const initFormInteractions = () => {
 	const updateCalculations = () => {
 		const price = parseInt(priceInp.value, 10);
 		const area = parseInt(areaInp.value, 10);
-		resultSpan.textContent = (price > 0 && area > 0) ? ` ~${formatNumber(price / area)} AED / sq ft` : '';
+		const pricePerSquare = (price > 0 && area > 0) ? Math.round(price / area) : 0;
+
+		resultSpan.textContent = ` ~${formatNumber(pricePerSquare)} AED / sq ft`;
+		pricePerSquareInp.value = pricePerSquare;
 	};
+
+	const updateOriginalPrice = () => {
+		const price = parseInt(priceInp.value, 10);
+		const originalPrice = parseInt(originalPriceInp.value, 10);
+
+		if (price > originalPrice || isNaN(originalPrice)) {
+			originalPriceInp.value = price;
+		}
+	}
+
+	const updateDiscount = () => {
+		const price = parseInt(priceInp.value, 10);
+		const originalPrice = parseInt(originalPriceInp.value, 10);
+		const discount = (originalPrice > 0 && price > 0 && originalPrice > price) ? Math.round((originalPrice - price) / originalPrice * 100) : 0;
+
+		discountSpan.textContent = discount + '%';
+		discountInp.value = discount;
+	}
 
 	const checkValidity = () => {
 		const requiredElements = form.querySelectorAll('[required], [data-required]');
@@ -55,11 +80,16 @@ const initFormInteractions = () => {
 	};
 
 	const initEvents = () => {
-		[priceInp, areaInp].forEach(inp => {
+		priceInp.addEventListener('input', () => {
+			updateOriginalPrice();
+		});
+
+		[priceInp, originalPriceInp, areaInp].forEach(inp => {
 			inp.addEventListener('keydown', handleNumericInput);
 			inp.addEventListener('input', () => {
 				inp.value = cleanNumericValue(inp.value);
 				updateCalculations();
+				updateDiscount();
 			});
 		});
 

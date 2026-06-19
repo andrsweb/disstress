@@ -162,6 +162,10 @@ fieldset {
 		& .half-width {
 			width: 50%;
 		}
+
+		&.column {
+			flex-direction: column;
+		}
 	}
 
 	&.hidden {
@@ -183,14 +187,21 @@ fieldset {
 	gap: 4px;
 }
 
-.sqrt-value {
+.sqrt-value,
+.discount-value {
 	color: v.$c-text-grey;
+	margin-top: 12px;
+	min-width: 130px;
 
 	@include t.t-text;
 
 	span {
 		color: v.$c-black;
 	}
+}
+
+.sqrt-value {
+	min-width: 250px;
 }
 
 .submit-buttons-wrapper {
@@ -279,7 +290,7 @@ input[type="number"] {
 	align-items: flex-start;
 }
 
-.dropdown {
+body:not(.home.wp-theme-distress) .dropdown {
 	width: 100%;
 	position: relative;
 	margin-top: 4px;
@@ -359,5 +370,11 @@ input[type="number"] {
 		.dropdown-arrow {
 			transform: rotate(180deg);
 		}
+	}
+}
+
+input {
+	&::placeholder {
+		color: #c4c4c4;
 	}
 }
