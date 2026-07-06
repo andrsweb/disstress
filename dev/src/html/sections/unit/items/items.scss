@@ -100,6 +100,25 @@
 			flex-wrap: wrap;
 			gap: 10px;
 		}
+
+		.discount {
+			display: flex;
+			color: #111;
+			font-size: 14px;
+			align-items: center;
+
+			span {
+				color: #FFF;
+				background-color: #111;
+				padding: 0 4px 0 6px;
+				border-radius: 4px;
+				font-weight: 800;
+				font-size: 20px;
+				display: flex;
+				align-items: center;
+				margin: 0 4px;
+			}
+		}
 	}
 
 	.swiper-slide {

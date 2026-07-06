@@ -149,6 +149,12 @@
 			align-items: center;
 			gap: 8px;
 		}
+
+		.discount {
+			span {
+				font-weight: 800;
+			}
+		}
 	}
 
 	&-bottom {

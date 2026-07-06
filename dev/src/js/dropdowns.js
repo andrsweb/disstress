@@ -77,7 +77,11 @@ const initSearch = (button) => {
 
 			if (optionText.includes(searchValue)) {
 				option.classList.remove('hidden')
+
+				const regex = new RegExp(`(${searchValue})`, 'gi')
+				option.innerHTML = option.textContent.replace(regex, '<b>$1</b>')
 			} else {
+				option.innerHTML = option.textContent.replace(/<b>|<\/b>/g, '')
 				option.classList.add('hidden')
 			}
 		})

@@ -41,7 +41,7 @@
 			width: 100%;
 			height: 100%;
 			object-fit: cover;
-			border-radius: v.$br8 v.$br8 0 0 ;
+			border-radius: v.$br8 v.$br8 0 0;
 			transition: transform ease-in-out v.$tr;
 		}
 
@@ -74,6 +74,10 @@
 			border-radius: 4px;
 
 			@include h.t-title-bold;
+
+			@media(max-width: v.$xs) {
+				padding: 4px;
+			}
 		}
 
 		p,
@@ -114,6 +118,44 @@
 			color: v.$c-black;
 
 			@include t.t-text;
+		}
+	}
+
+	.original-price {
+		display: flex;
+		color: v.$c-black;
+		font-weight: 800;
+		font-size: 18px;
+		line-height: 28px;
+	}
+
+	.price-title {
+		display: flex;
+		justify-content: space-between;
+		width: 100%;
+
+		@media(max-width: v.$xs) {
+			flex-direction: column;
+			gap: 12px;
+		}
+	}
+
+	.discount {
+		display: flex;
+		color: #111;
+		font-size: 14px;
+		align-items: center;
+
+		span {
+			color: #FFF;
+			background-color: #111;
+			padding: 0 4px 0 6px;
+			border-radius: 4px;
+			font-weight: 800;
+			font-size: 20px;
+			display: flex;
+			align-items: center;
+			margin-left: 4px;
 		}
 	}
 }

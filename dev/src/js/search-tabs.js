@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	'use strict'
 
 	void initSearchTabs()
+	void initSearchInDropdowns()
 })
 
 const containerClosers = new Map()
@@ -47,13 +48,7 @@ const initSearchTabs = async () => {
 		const locationValue = container.querySelector('[data-search-location-value]')
 		const panel = container.querySelector('[role="tabpanel"]')
 		const selectors = Array.from(container.querySelectorAll('[data-search-selector]'))
-console.log(tabs.length);
-		console.log(typeField);
-		console.log(locationText);
-		console.log(developerText);
-		console.log(locationValue);
-		console.log(developerValue);
-		console.log(panel);
+
 		if (!typeField || !locationText || !developerText || !locationValue || !developerValue || !panel) return
 
 		const filterBindings = {
@@ -189,7 +184,7 @@ console.log(tabs.length);
 				e.preventDefault()
 				const isOpen = selector.classList.contains('is-open')
 
-				if (isOpen) {
+				if (isOpen && !e.target.classList.contains('dropdown-search-input')) {
 					closeAllDropdowns()
 					return
 				}
@@ -331,5 +326,48 @@ console.log(tabs.length);
 
 			updateDisplayText()
 		}
+	})
+}
+
+const initSearchInDropdowns = () => {
+	const searchInputs = document.querySelectorAll('.tab-selector .dropdown-search-input')
+	if (!searchInputs.length) return
+
+	searchInputs.forEach(searchInput => {
+		const tab = searchInput.closest('.tab-field')
+		if (!tab) return
+
+		const dropdown = tab.querySelector('.tab-dropdown');
+		if (!dropdown) return
+
+		let options = null;
+
+		searchInput.addEventListener('input', () => {
+			if (options === options || !options.length) {
+				options = dropdown.querySelectorAll('.tab-option')
+			}
+
+			const searchValue = searchInput.value.toLowerCase()
+
+			options.forEach(option => {
+				const span = option.querySelector('span')
+				const optionText = span.textContent.toLowerCase()
+
+				if (0 === searchValue.length) {
+					option.classList.remove('hidden')
+				}
+
+				if (optionText.includes(searchValue)) {
+					option.classList.remove('hidden')
+
+					const regex = new RegExp(`(${searchValue})`, 'gi')
+					span.innerHTML = span.textContent.replace(regex, '<b>$1</b>')
+				} else {
+					span.innerHTML = span.textContent.replace(/<b>|<\/b>/g, '')
+					option.classList.add('hidden')
+				}
+			})
+
+		})
 	})
 }

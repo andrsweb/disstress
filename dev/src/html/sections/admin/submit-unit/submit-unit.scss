@@ -78,6 +78,12 @@ fieldset {
 			min-height: 169px;
 		}
 	}
+
+	&-errors {
+		color: #FF4C00;
+		font-size: 12px;
+		border-bottom: 3px solid #FF4C00;
+	}
 }
 
 .dropdown-button {
@@ -129,7 +135,7 @@ fieldset {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-	align-items: flex-start;
+	align-items: center;
 	gap: 16px;
 
 	@media(min-width: v.$md) {
