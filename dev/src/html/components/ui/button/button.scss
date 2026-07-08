@@ -203,6 +203,19 @@
 	}
 }
 
+.menu-item {
+	.link.logout {
+		padding: 0;
+		font-size: 14px;
+	}
+}
+
+@media(max-width: v.$xm) {
+	.profile-tabs-buttons .link.logout {
+		display: none;
+	}
+}
+
 .edit-property-link {
 	margin-bottom: 0;
 }

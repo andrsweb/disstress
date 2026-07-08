@@ -307,9 +307,8 @@ const updatePropertiesList = () => {
  * Remove from URl pagination like /page-2/ and add to URL all filter parameters as GET params
  */
 const getUrlWithFilters = (formData) => {
-	let currentHref = window.location.href.replace(/\/page-\d+(?=\/|$)/g, '');
+	let currentHref = removePaginationFromUrl();
 
-	currentHref = currentHref.replace(/[?&]+([^=&]+)=([^&]*)/gi, '');
 	currentHref += '?filtered=true';
 
 	formData.forEach((value, key) => {
@@ -323,6 +322,21 @@ const getUrlWithFilters = (formData) => {
 	});
 
 	return currentHref;
+}
+
+function removePaginationFromUrl(urlString = window.location.href) {
+	const url = new URL(urlString);
+
+	url.pathname = url.pathname
+		.replace(/\/page-\d+\/?$/i, '/')
+		.replace(/\/page\/\d+\/?$/i, '/')
+		.replace(/\/{2,}/g, '/');
+
+	url.searchParams.delete('page');
+	url.searchParams.delete('paged');
+	url.searchParams.delete('pagination');
+
+	return url.origin + url.pathname;
 }
 
 const initSearchInFilters = () => {

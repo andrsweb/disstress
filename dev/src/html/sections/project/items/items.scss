@@ -365,7 +365,9 @@
 	}
 
 	.texts {
-		max-width: 600px;
+		p {
+			text-align: justify;
+		}
 	}
 
 	.learn-more {

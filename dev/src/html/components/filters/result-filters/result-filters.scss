@@ -136,13 +136,16 @@
 			height: 16px;
 			opacity: 0;
 			transition: opacity v.$tr;
+			display: none;
 		}
 
 		&.is-selected {
 			color: v.$c-black;
+			display: flex;
 
 			.result-option-check {
 				opacity: 1;
+				display: inline;
 			}
 		}
 	}

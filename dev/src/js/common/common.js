@@ -33,7 +33,7 @@ document.addEventListener('click', (e) => {
 	const trigger = e.target.closest('[data-modal-open="plan-modal"]');
 	if (!trigger) return;
 
-	const modal  = document.querySelector('.modal-wrapper[data-modal-id="plan-modal"]');
+	const modal = document.querySelector('.modal-wrapper[data-modal-id="plan-modal"]');
 	const imgTag = modal?.querySelector('[data-modal-img]');
 	if (!imgTag) return;
 
@@ -42,4 +42,23 @@ document.addEventListener('click', (e) => {
 		|| trigger.querySelector('img')?.getAttribute('src');
 
 	if (src) imgTag.src = src;
+});
+
+document.addEventListener('click', (e) => {
+	const brokerModalBtn = e.target.closest('[data-modal-open="broker-modal"]');
+	if (!brokerModalBtn) return;
+
+	const modal = document.querySelector('.modal-wrapper[data-modal-id="broker-modal"]'),
+		phoneLink = modal?.querySelector('#bm_phone'),
+		whatsAppLink = modal?.querySelector('#bm_whatsapp'),
+		brokerPhone = brokerModalBtn.getAttribute('data-broker-phone'),
+		brokerWhatsApp = brokerModalBtn.getAttribute('data-broker-whatsapp');
+
+	if (phoneLink && brokerPhone) {
+		phoneLink.href = brokerPhone;
+	}
+
+	if (whatsAppLink && brokerWhatsApp) {
+		whatsAppLink.href = brokerWhatsApp;
+	}
 });
