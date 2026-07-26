@@ -19,6 +19,10 @@
 		@media(min-width: v.$sm) {
 			gap: 32px;
 		}
+
+		@media(max-width: v.$sm) {
+			justify-content: flex-end;
+		}
 	}
 
 	&-logo {
@@ -27,6 +31,17 @@
 		justify-content: center;
 		position: relative;
 		z-index: 100;
+
+		@media(max-width: v.$sm) {
+			max-width: 70px;
+			position: absolute;
+			left: 12px;
+			top: 3px;
+		}
+
+		@media(max-width: v.$xs) {
+			display: none;
+		}
 
 		img {
 			width: auto;
