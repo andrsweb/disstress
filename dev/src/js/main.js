@@ -4,6 +4,7 @@ import './common/tabs';
 import './search-tabs.js';
 import './contact-panel';
 import '../html/sections/unit/map/map';
+import './map/map';
 import './swiper';
 import './gallery';
 import './dropdowns';

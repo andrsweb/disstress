@@ -1,0 +1,27 @@
+<div class="map js-map-instance" 
+     data-map-mode="@@mode" 
+     data-property-id="@@propertyId" 
+     data-show-sidebar="@@showSidebar">
+    <div class="map-container js-map-container"></div>
+
+    <aside class="map-sidebar is-hidden js-map-sidebar">
+        <div class="aside-map-header">
+            <div class="map-handle-wrapper">
+                <span class="map-sidebar-handle"></span>
+            </div>
+            <button class="sidebar-close js-map-sidebar-close">
+                <img src="/img/close.svg" width="32" height="32" alt="Close">
+            </button>
+        </div>
+
+        <div class="map-sidebar-content">
+            @@include('components/ui/loader/loader.html')
+            <div class="sidebar-card-target js-sidebar-card-target"></div>
+        </div>
+        <div class="a-link">
+            <a href="#" class="button orange sm full-width">
+                Explore Project
+            </a>
+        </div>
+    </aside>
+</div>

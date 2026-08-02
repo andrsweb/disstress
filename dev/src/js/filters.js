@@ -249,11 +249,9 @@ const initPropertiesFilters = () => {
 
 const updatePropertiesList = () => {
 	const filterItem = document.querySelector('.results-filters-items');
-	let filterButtons = filterItem.querySelectorAll('button.result-filter'),
-		formData = new FormData(),
+	let filterButtons = filterItem.querySelectorAll('button.result-filter'), formData = new FormData(),
 		resultsBlock = document.getElementById('result-tabs-list-panel'),
-		h2Block = document.querySelector('.title-top h2'),
-		action = filterItem?.querySelector('input[name="action"]'),
+		h2Block = document.querySelector('.title-top h2'), action = filterItem?.querySelector('input[name="action"]'),
 		allInputs = filterItem?.querySelectorAll('input');
 
 	resultsBlock.classList.add('preloader');
@@ -261,6 +259,9 @@ const updatePropertiesList = () => {
 	formData.append('action', action.value ?? 'get_properties');
 	formData.append('_ajax_nonce', ajax_object._ajax_nonce);
 	filterButtons.forEach(button => {
+		if (!button.dataset.selectedValue) {
+			return;
+		}
 		formData.append(button.dataset.filter, button.dataset.selectedValue);
 	});
 
@@ -278,9 +279,7 @@ const updatePropertiesList = () => {
 	formData.append('current_href', urlWithFilters);
 
 	fetch(ajax_object.ajax_url, {
-		method: 'POST',
-		body: formData,
-		headers: {
+		method: 'POST', body: formData, headers: {
 			'Accept': 'application/json'
 		}
 	})
